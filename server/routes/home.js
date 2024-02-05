@@ -5,6 +5,6 @@ const { getAllTasks, createNewTask } = require('../controllers/homeControl');
 const router = express.Router();
 
 router.get('/', getAllTasks);
-router.post('/create', createNewTask);
+router.post('/createtask', createNewTask);
 
 module.exports = router;

@@ -8,7 +8,7 @@ const taskSchema = new Schema({
     rank: {type: String, required: true, enum: ['Most Important thing in the world', 'Very Important', 'Important', 'Just need to do it', 'Optional', 'Not required']},
 }, 
 {
-    "timestamps": true
+    timestamps: true
 })
 
 module.exports = mongoose.model("Task", taskSchema);
