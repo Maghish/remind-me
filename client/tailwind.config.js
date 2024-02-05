@@ -5,7 +5,12 @@ export default {
     "./src/**/*.jsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+        colors: {
+            'form-input-color': '#33302e',
+            'form-submit-btn-color': '#BF55EC'
+        }
+    },
   },
   plugins: [],
 }

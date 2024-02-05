@@ -38,5 +38,9 @@ export default function App() {
         }
     ])
 
-    return routes
+    return (
+        <div className='min-h-screen max-w-full'>
+            {routes}        
+        </div>
+    )
 }
