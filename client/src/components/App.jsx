@@ -20,7 +20,7 @@ export default function App() {
             children: [
                 {
                     index: true,
-                    element: <Home />
+                    element: <SignupPage />
                 },
                 {
                     path: 'login',

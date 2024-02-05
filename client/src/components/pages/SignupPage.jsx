@@ -1,7 +1,9 @@
+import '../../css/index.css'
+
 function SignupPage() {
     return (
         <>
-            <p>Sign up page</p>
+            
         </>
     )
 }
