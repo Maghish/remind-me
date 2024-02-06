@@ -5,8 +5,28 @@ const getCurrentUser = async (req, res) => {}
 const createNewUser = async (req, res) => {
     try {
         const {username, email, password} = req.body;
-        const newUser = await authUserModel.create({username, email, password});
-        res.status(200).json(newUser);
+        const allUsers = await authUserModel.find({});
+        let t = null;
+        allUsers.forEach(user => {
+            if (user.username.trimEnd() === username.trimEnd()) {
+                t=1;
+                res.status(400).json({
+                    errorMessage: 'User already exists with the same username'
+                }); 
+            }
+
+            if (user.email.trimEnd() === email.trimEnd()) {
+                t=1;
+                res.status(400).json({
+                    errorMessage: 'User already exists with the same email'
+                }); 
+            }
+        }) 
+
+        if (t === null) {
+            const newUser = await authUserModel.create({username, email, password});
+            res.status(200).json(newUser);
+        }
     }
     
     catch (error) {
