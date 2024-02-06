@@ -1,5 +1,6 @@
 import '../../css/index.css'
 import { useState } from 'react' 
+import axios from 'axios'
 
 function SignupPage() {
 
@@ -7,7 +8,13 @@ function SignupPage() {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null) 
 
-    const signUpUser = () => {}
+    const signUpUser = () => {
+        axios.post('/auth/signupuser', {
+            username: username,
+            email: email,
+            password: password            
+        })
+    }
 
     return (
         <>
@@ -21,7 +28,7 @@ function SignupPage() {
                         <input type='email' className='bg-form-input-color rounded-md mt-2 p-2 px-4 text-stone-300 text-sm font-mono outline-none placeholder:text-stone-500 placeholder:text-sm placeholder:font-mono' placeholder='john@email.com' onChange={(e) => {setEmail(e.target.value)}}></input>
                         <label className='text-stone-300 mt-2 font-mono'>Password: </label>
                         <input type='password' className='bg-form-input-color rounded-md mt-2 p-2 px-4 text-stone-300 text-sm font-mono outline-none placeholder:text-stone-500 placeholder:text-sm placeholder:font-mono' placeholder='johnlovescat' onChange={(e) => {setPassword(e.target.value)}}></input>
-                        <button type='button' className='bg-form-submit-btn-color self-center w-max p-3 mt-5 rounded-lg font-mono hover:opacity-95'>Sign Up</button>
+                        <button type='button' className='bg-form-submit-btn-color self-center w-max p-3 mt-5 rounded-lg font-mono hover:opacity-95' onClick={signUpUser}>Sign Up</button>
                     </form>
                 </div>
             </div>

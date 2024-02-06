@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const home = require('./routes/home');
+const auth = require('./routes/auth');
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api', home);
+app.use('/auth', auth);
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
