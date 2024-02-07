@@ -3,6 +3,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+import SetCookie from '../../hooks/setCookie'
+
 function SignupPage() {
 
     const [username, setUsername] = useState(null)
@@ -12,7 +14,9 @@ function SignupPage() {
 
     const navigate = useNavigate()
 
-    const authenticate = () => {}
+    const authenticate = (response) => {
+        SetCookie('userToken', response.token)
+    }
 
     const signUpUser = () => {
         axios.post('/auth/signupuser', {
@@ -21,17 +25,12 @@ function SignupPage() {
             password: password            
         })
         .then(res => {
-            authenticate(res)
+            authenticate(res.data)
             navigate('login')
         })
         .catch(error => {
-            if (error.response.data.errorMessage) {
-                setErrorMessage(error.response.data.errorMessage)
-            }
-
-            else {
-                throw error 
-            }
+            // setErrorMessage(error.response.data.errorMessage)
+            throw error
         })
     }
 

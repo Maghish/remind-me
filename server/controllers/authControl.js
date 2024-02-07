@@ -29,7 +29,10 @@ const createNewUser = async (req, res) => {
 
         if (t === null) {
             const newUser = await authUserModel.create({username, email, password});
-            res.status(200).json(newUser);
+            res.status(200).json({
+                userData: newUser,
+                token: btoa(email)
+            });
 
             return
         }
