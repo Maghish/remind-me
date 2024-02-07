@@ -1,7 +1,7 @@
 import '../../css/index.css'
 import { useState } from 'react' 
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import SetCookie from '../../hooks/setCookie'
 
@@ -49,6 +49,7 @@ function SignupPage() {
                         <input type='password' className='bg-form-input-color rounded-md mt-2 p-2 px-4 text-stone-300 text-sm font-mono outline-none placeholder:text-stone-500 placeholder:text-sm placeholder:font-mono' placeholder='johnlovescat' onChange={(e) => {setPassword(e.target.value)}}></input>
                         <button type='button' className='bg-form-submit-btn-color self-center w-max p-3 mt-5 rounded-lg font-mono hover:opacity-95' onClick={signUpUser}>Sign Up</button>
                     </form>
+                    <p className='font-mono text-stone-300 text-sm mt-7'>Already have an account? <Link className='!text-blue-600 hover:underline' to="/login">Login!</Link></p>
                 </div>
             </div>
         </>
