@@ -22,7 +22,6 @@ function SignupPage() {
         })
         .then(res => {
             authenticate(res)
-            
             navigate('login')
         })
         .catch(error => {
