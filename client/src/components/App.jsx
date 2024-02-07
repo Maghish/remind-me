@@ -9,9 +9,32 @@ import CreateTask from './pages/CreateTask'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 
+import GetCookie from '../hooks/getCookie'
+
 axios.defaults.baseURL = urlconfig.url
 
-function DecidePage() {}
+function DecidePage() {
+    const token = GetCookie('userToken')
+
+    const [userCred, setUserCred] = useState({})
+    const [page, setPage] = useState(null)
+
+    axios.post('/auth', {
+        token: token
+    })
+    .then(res => {
+        setPage(1)
+        setUserCred(res.data.userData)
+    })    
+    .catch(error => {
+        setPage(2)
+    })
+
+    if (page) {
+        if (page === 1) {return <Home {...userCred} />}
+        if (page === 2) {return <Navigate to='/login' />}
+    }
+}
 
 export default function App() {
     let routes = useRoutes([
@@ -20,7 +43,7 @@ export default function App() {
             children: [
                 {
                     index: true,
-                    element: <SignupPage />
+                    element: <DecidePage />
                 },
                 {
                     path: 'login',

@@ -1,7 +1,7 @@
-function Home() {
+function Home(props) {
     return (
         <>
-            <p>Home</p>
+            <p className="text-white">Welcome {props.username}!</p>
         </>
     )
 }

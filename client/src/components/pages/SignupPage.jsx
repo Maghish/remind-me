@@ -26,7 +26,7 @@ function SignupPage() {
         })
         .then(res => {
             authenticate(res.data)
-            navigate('login')
+            navigate('/')
         })
         .catch(error => {
             // setErrorMessage(error.response.data.errorMessage)
