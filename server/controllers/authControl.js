@@ -72,7 +72,54 @@ const createNewUser = async (req, res) => {
     }
 }
 
-const logInUser = async (req, res) => {}
+const logInUser = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const allUsers = await authUserModel.find({})
+        let t = null;
+        allUsers.forEach(user => {
+            if (user.email === email && user.password === password) {
+                t=1;
+                res.status(200).json({
+                    userData: user,
+                    token: btoa(email)
+                })
+
+                return
+            }
+
+            if (user.email === email && user.password !== password) {
+                t=1;
+                res.status(400).json({
+                    errorMessage: 'Invalid Password'                    
+                })
+
+                return
+            }
+
+            if (user.email !== email) {
+                t=1;
+                res.status(400).json({
+                    errorMessage: 'Invalid Email'
+                })
+
+                return
+            }
+        })
+
+        if (t === null) {
+            res.status(400).json({
+                errorMessage: 'Invalid Email'
+            })
+        }
+    }
+
+    catch (error) {
+        res.status(400).json({
+            errorMessage: error.message
+        })
+    }
+}
 
 module.exports = {
     getCurrentUser,
