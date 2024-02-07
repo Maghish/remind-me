@@ -26,8 +26,13 @@ function SignupPage() {
             navigate('login')
         })
         .catch(error => {
-            throw error
-            
+            if (error.response.data.errorMessage) {
+                setErrorMessage(error.response.data.errorMessage)
+            }
+
+            else {
+                throw error 
+            }
         })
     }
 
