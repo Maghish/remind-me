@@ -1,6 +1,7 @@
 import '../../css/index.css'
 import { useState } from 'react' 
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function SignupPage() {
 
@@ -9,6 +10,10 @@ function SignupPage() {
     const [password, setPassword] = useState(null) 
     const [errorMessage, setErrorMessage] = useState(null)
 
+    const navigate = useNavigate()
+
+    const authenticate = () => {}
+
     const signUpUser = () => {
         axios.post('/auth/signupuser', {
             username: username,
@@ -16,10 +21,13 @@ function SignupPage() {
             password: password            
         })
         .then(res => {
-            console.log(res)
+            authenticate(res)
+            
+            navigate('login')
         })
         .catch(error => {
-            setErrorMessage(error.response.data.errorMessage)
+            throw error
+            
         })
     }
 

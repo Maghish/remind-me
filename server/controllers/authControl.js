@@ -13,6 +13,8 @@ const createNewUser = async (req, res) => {
                 res.status(400).json({
                     errorMessage: 'User already exists with the same username'
                 }); 
+
+                return
             }
 
             if (user.email.trimEnd() === email.trimEnd()) {
@@ -20,12 +22,16 @@ const createNewUser = async (req, res) => {
                 res.status(400).json({
                     errorMessage: 'User already exists with the same email'
                 }); 
+
+                return 
             }
         }) 
 
         if (t === null) {
             const newUser = await authUserModel.create({username, email, password});
             res.status(200).json(newUser);
+
+            return
         }
     }
     
