@@ -1,6 +1,35 @@
 const authUserModel = require('../models/authUserModel');
 
-const getCurrentUser = async (req, res) => {}
+const getCurrentUser = async (req, res) => {
+    try {
+        const {token} = req.body;
+        const email = atob(token.toString());
+        const allUsers = await authUserModel.find({});
+        let t = null;
+        allUsers.forEach(user => {
+            if (user.email === email) {
+                t=1;
+                res.status(200).json({
+                    userData: user
+                });
+
+                return
+            }
+        })
+
+        if (t === null) {
+            res.status(400).json({
+                errorMessage: 'Invalid Token'
+            });
+
+            return
+        }
+    }
+
+    catch (error) {
+        res.status(400).json(error.message);
+    }
+}
 
 const createNewUser = async (req, res) => {
     try {
