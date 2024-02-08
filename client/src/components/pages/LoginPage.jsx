@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import axios from 'axios'
 
 import ErrorBox from "../ErrorBox"
 
 import SetCookie from "../../hooks/setCookie"
+import GetCookie from "../../hooks/getCookie"
 
 function LoginPage() {
 
@@ -29,6 +30,10 @@ function LoginPage() {
         .catch(error => {
             setErrorMessage(error.response.data.errorMessage)
         })
+    }
+
+    if (GetCookie('userToken')) {
+        return <Navigate to="/" />
     }
 
     return (
