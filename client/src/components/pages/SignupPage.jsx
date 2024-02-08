@@ -1,11 +1,12 @@
 import '../../css/index.css'
 import { useState } from 'react' 
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 import ErrorBox from '../ErrorBox'
 
 import SetCookie from '../../hooks/setCookie'
+import GetCookie  from '../../hooks/getCookie'
 
 function SignupPage() {
 
@@ -33,6 +34,10 @@ function SignupPage() {
         .catch(error => {
             setErrorMessage(error.response.data.errorMessage)
         })
+    }
+
+    if (GetCookie('userToken')) {
+        return <Navigate to="/" />
     }
 
     return (
