@@ -17,18 +17,24 @@ function DecidePage() {
     const token = GetCookie('userToken')
 
     const [userCred, setUserCred] = useState({})
-    const [page, setPage] = useState(null)
+    const [page, setPage] = useState(0)
 
-    axios.post('/auth', {
-        token: token
-    })
-    .then(res => {
-        setPage(1)
-        setUserCred(res.data.userData)
-    })    
-    .catch(error => {
-        setPage(2)
-    })
+    
+    useEffect(() => {
+        async function getCurrentUser() {
+            try {
+                const res = await axios.post('/auth', {token: token})
+                setPage(1)
+                setUserCred(res.data.userData)
+            }
+
+            catch (error) {
+                setPage(2)
+            }
+        }
+
+        getCurrentUser()
+    }, [])
 
     if (page) {
         if (page === 1) {return <Home {...userCred} />}
