@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios'
 
+import ErrorBox from "../ErrorBox"
+
 import SetCookie from "../../hooks/setCookie"
 
 function LoginPage() {
@@ -34,7 +36,7 @@ function LoginPage() {
             <div className='flex items-center justify-center w-full h-screen'>
                 <div className='bg-stone-800 w-[400px] rounded-2xl p-5 px-9'>
                     <p className='text-center w-full text-stone-300 font-mono text-xl'>Login</p>
-                    {errorMessage && <p>{errorMessage}</p>}
+                    {errorMessage && <ErrorBox errorMessage={errorMessage} />}
                     <form className='flex flex-col'>
                         <label className='text-stone-300 mt-2 font-mono'>Email: </label>
                         <input type='email' className='bg-form-input-color rounded-md mt-2 p-2 px-4 text-stone-300 text-sm font-mono outline-none placeholder:text-stone-500 placeholder:text-sm placeholder:font-mono' placeholder='john@email.com' onChange={(e) => {setEmail(e.target.value)}}></input>
