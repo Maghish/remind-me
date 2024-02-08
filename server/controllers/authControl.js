@@ -111,6 +111,8 @@ const logInUser = async (req, res) => {
             res.status(400).json({
                 errorMessage: 'Invalid Email'
             })
+
+            return
         }
     }
 
@@ -118,6 +120,8 @@ const logInUser = async (req, res) => {
         res.status(400).json({
             errorMessage: error.message
         })
+
+        return
     }
 }
 
