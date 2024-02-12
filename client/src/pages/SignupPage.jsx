@@ -1,4 +1,3 @@
-import '../css/index.css'
 import { useState } from 'react' 
 import axios from 'axios'
 import { Link, Navigate, useNavigate } from 'react-router-dom'

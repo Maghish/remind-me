@@ -1,5 +1,3 @@
-import '../css/index.css'
-
 function ErrorBox(props) {
     return (
         <>
