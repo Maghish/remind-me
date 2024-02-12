@@ -1,3 +1,5 @@
+import '../css/index.css'
+
 import { useEffect, useState } from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
 import axios from 'axios'
