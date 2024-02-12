@@ -1,12 +1,12 @@
-import '../../css/index.css'
+import '../css/index.css'
 import { useState } from 'react' 
 import axios from 'axios'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 
-import ErrorBox from '../ErrorBox'
+import ErrorBox from '../components/ErrorBox'
 
-import SetCookie from '../../hooks/setCookie'
-import GetCookie  from '../../hooks/getCookie'
+import SetCookie from '../hooks/setCookie'
+import GetCookie  from '../hooks/getCookie'
 
 function SignupPage() {
 

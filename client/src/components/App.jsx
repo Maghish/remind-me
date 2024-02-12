@@ -4,10 +4,10 @@ import axios from 'axios'
 
 import urlconfig from '../urlconfig.json'
 
-import Home from './pages/Home'
-import CreateTask from './pages/CreateTask'
-import LoginPage from './pages/LoginPage'
-import SignupPage from './pages/SignupPage'
+import Home from '../pages/Home'
+import CreateTask from '../pages/CreateTask'
+import LoginPage from '../pages/LoginPage'
+import SignupPage from '../pages/SignupPage'
 
 import GetCookie from '../hooks/getCookie'
 

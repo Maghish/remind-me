@@ -2,10 +2,10 @@ import { useState } from "react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import axios from 'axios'
 
-import ErrorBox from "../ErrorBox"
+import ErrorBox from "../components/ErrorBox"
 
-import SetCookie from "../../hooks/setCookie"
-import GetCookie from "../../hooks/getCookie"
+import SetCookie from "../hooks/setCookie"
+import GetCookie from "../hooks/getCookie"
 
 function LoginPage() {
 
