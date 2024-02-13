@@ -84,9 +84,9 @@ const logInUser = async (req, res) => {
         let user;
         try {
             allUsers.forEach(user => {
-                if (user.email === email && user.password === password) {t=1; user=user; throw new SyntaxError;}
-                if (user.email === email && user.password !== password) {t=2; user=user}
-                if (user.email !== email) {t=3; user=user}
+                if (user.email.trimEnd() === email.trimEnd() && user.password.trimEnd() === password.trimEnd()) {t=1; user=user; throw new SyntaxError;}
+                if (user.email.trimEnd() === email.trimEnd() && user.password.trimEnd() !== password.trimEnd()) {t=2; user=user}
+                if (user.email.trimEnd() !== email.trimEnd()) {t=3; user=user}
             })
         }
 
