@@ -10,23 +10,9 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-    credentials: true,
-    origin: ['http://localhost:5173/', 'https://remind-6vkjxc8hq-maghishs-projects.vercel.app/', 'https://remind-me-blond.vercel.app/', 'https://remind-me-git-main-maghishs-projects.vercel.app/']
-}));
-
-app.use((req, res, next) => {
-    console.log(req.method, req.url);
-    next();
-})
+app.use(cors());
 
 app.use('/api', home);
-app.options('/auth', function (req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  res.end();
-});
 app.use('/auth', auth);
 
 mongoose.connect(process.env.MONGO_URI)
