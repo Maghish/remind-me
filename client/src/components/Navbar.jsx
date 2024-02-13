@@ -6,7 +6,7 @@ function Navbar(props) {
             <p className="font-mono text-white text-2xl"><Link to="/">Remind Me</Link></p>
             <p className="font-mono text-stone-300 text-md pl-14 hover:text-white"><Link>Docs</Link></p>
             <p className="font-mono text-stone-300 text-md pl-10 hover:text-white"><Link>Create a task</Link></p>
-            <p className="font-mono ml-auto text-stone-400 pl-10 text-md hover:text-white cursor-pointer">Loggin In as {props.username}</p>
+            <p className="font-mono ml-auto text-stone-400 pl-10 text-md hover:text-white cursor-pointer">Logged in as {props.username}</p>
         </div>
     )
 }
