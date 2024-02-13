@@ -6,6 +6,7 @@ const taskSchema = new Schema({
     name: {type: String, required: true},
     description: {type: String, required: true},
     rank: {type: Number, required: true},
+    creatorID: {type: String, required: true}
 }, 
 {
     timestamps: true
