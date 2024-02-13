@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
 import axios from 'axios'
 
-import urlconfig from '../urlconfig.json'
-
 import Home from '../pages/Home'
 import CreateTask from '../pages/CreateTask'
 import LoginPage from '../pages/LoginPage'
@@ -13,7 +11,7 @@ import SignupPage from '../pages/SignupPage'
 
 import GetCookie from '../hooks/GetCookie'
 
-axios.defaults.baseURL = urlconfig.url
+axios.defaults.baseURL = "http://localhost:4000/"
 
 function DecidePage() {
     const token = GetCookie('userToken')
