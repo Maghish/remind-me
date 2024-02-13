@@ -28,6 +28,8 @@ const getCurrentUser = async (req, res) => {
 
     catch (error) {
         res.status(400).json(error.message);
+
+        return
     }
 }
 
@@ -69,6 +71,8 @@ const createNewUser = async (req, res) => {
     
     catch (error) {
         res.status(400).json(error.message);
+
+        return
     }
 }
 
@@ -77,37 +81,44 @@ const logInUser = async (req, res) => {
         const {email, password} = req.body;
         const allUsers = await authUserModel.find({})
         let t = null;
-        allUsers.forEach(user => {
-            if (user.email === email && user.password === password) {
-                t=1;
-                res.status(200).json({
-                    userData: user,
-                    token: btoa(email)
-                })
+        let user;
+        try {
+            allUsers.forEach(user => {
+                if (user.email === email && user.password === password) {t=1; user=user; throw new SyntaxError;}
+                if (user.email === email && user.password !== password) {t=2; user=user}
+                if (user.email !== email) {t=3; user=user}
+            })
+        }
 
-                return
-            }
-
-            if (user.email === email && user.password !== password) {
-                t=1;
-                res.status(400).json({
-                    errorMessage: 'Invalid Password'                    
-                })
-
-                return
-            }
-
-            if (user.email !== email) {
-                t=1;
-                res.status(400).json({
-                    errorMessage: 'Invalid Email'
-                })
-
-                return
-            }
-        })
+        catch (error) {}
+        
 
         if (t === null) {
+            res.status(400).json({
+                errorMessage: 'Invalid Email'
+            })
+
+            return
+        }
+
+        if (t === 1) {
+            res.status(200).json({
+                userData: user,
+                token: btoa(email)
+            })
+
+            return
+        }
+
+        if (t === 2) {
+            res.status(400).json({
+                errorMessage: 'Invalid Password'                    
+            })
+
+            return
+        }
+
+        if (t === 3) {
             res.status(400).json({
                 errorMessage: 'Invalid Email'
             })

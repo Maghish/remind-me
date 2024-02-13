@@ -28,7 +28,8 @@ function LoginPage() {
             navigate('/')
         })
         .catch(error => {
-            setErrorMessage(error.response.data.errorMessage)
+            // setErrorMessage(error.response.data.errorMessage)
+            throw error
         })
     }
 
