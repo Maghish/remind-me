@@ -11,7 +11,7 @@ import CreateTask from '../pages/CreateTask'
 import LoginPage from '../pages/LoginPage'
 import SignupPage from '../pages/SignupPage'
 
-import GetCookie from '../hooks/getCookie'
+import GetCookie from '../hooks/GetCookie'
 
 axios.defaults.baseURL = urlconfig.url
 

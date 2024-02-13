@@ -4,8 +4,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 import ErrorBox from '../components/ErrorBox'
 
-import SetCookie from '../hooks/setCookie'
-import GetCookie  from '../hooks/getCookie'
+import SetCookie from '../hooks/SetCookie'
+import GetCookie  from '../hooks/GetCookie'
 
 function SignupPage() {
 

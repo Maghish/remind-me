@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import TaskBox from "../components/TaskBox"
 
+import GetCookie from '../hooks/GetCookie'
+
 import axios from "axios"
 
 function Home(props) {
@@ -15,11 +17,18 @@ function Home(props) {
     useEffect(() => {
         async function getAllTasks() {
             try {
-                const res = await axios.get("/api")
-                setAllTasks(res.data)
-                setTaskName(res.data[0].name)
-                setTaskDesc(res.data[0].description)
-                setTaskRank(res.data[0].rank)
+                axios.post('/auth', {token: GetCookie('userToken')})
+                .then(currentUser => {
+                    const currentUserId = currentUser.data.userData._id;
+                    axios.post("/api/gettasks", {creatorID: currentUserId})
+                    .then(res => {
+                        setAllTasks(res.data)
+                        setTaskName(res.data[0].name)
+                        setTaskDesc(res.data[0].description)
+                        setTaskRank(res.data[0].rank)
+                    })
+                   
+                })
             }
 
             catch (error) {
