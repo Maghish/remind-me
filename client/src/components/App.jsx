@@ -1,75 +1,72 @@
-import '../css/index.css'
+import "../css/index.css";
 
-import { useEffect, useState } from 'react'
-import { Navigate, useRoutes } from 'react-router-dom'
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import { Navigate, useRoutes } from "react-router-dom";
+import axios from "axios";
 
-import Home from '../pages/Home'
-import CreateTask from '../pages/CreateTask'
-import LoginPage from '../pages/LoginPage'
-import SignupPage from '../pages/SignupPage'
+import Home from "../pages/Home";
+import CreateTask from "../pages/CreateTask";
+import LoginPage from "../pages/LoginPage";
+import SignupPage from "../pages/SignupPage";
 
-import GetCookie from '../hooks/GetCookie'
+import GetCookie from "../hooks/GetCookie";
 
-axios.defaults.baseURL = "http://localhost:4000/"
+axios.defaults.baseURL = "https://remind-me-r5u3.onrender.com";
 
 function DecidePage() {
-    const token = GetCookie('userToken')
+  const token = GetCookie("userToken");
 
-    const [userCred, setUserCred] = useState({})
-    const [page, setPage] = useState(0)
+  const [userCred, setUserCred] = useState({});
+  const [page, setPage] = useState(0);
 
-    
-    useEffect(() => {
-        async function getCurrentUser() {
-            try {
-                const res = await axios.post('/auth', {token: token})
-                setPage(1)
-                setUserCred(res.data.userData)
-            }
-
-            catch (error) {
-                setPage(2)
-            }
-        }
-
-        getCurrentUser()
-    }, [])
-
-    if (page) {
-        if (page === 1) {return <Home {...userCred} />}
-        if (page === 2) {return <Navigate to='/login' />}
+  useEffect(() => {
+    async function getCurrentUser() {
+      try {
+        const res = await axios.post("/auth", { token: token });
+        setPage(1);
+        setUserCred(res.data.userData);
+      } catch (error) {
+        setPage(2);
+      }
     }
+
+    getCurrentUser();
+  }, []);
+
+  if (page) {
+    if (page === 1) {
+      return <Home {...userCred} />;
+    }
+    if (page === 2) {
+      return <Navigate to="/login" />;
+    }
+  }
 }
 
 export default function App() {
-    let routes = useRoutes([
+  let routes = useRoutes([
+    {
+      path: "/",
+      children: [
         {
-            path: '/',
-            children: [
-                {
-                    index: true,
-                    element: <DecidePage />
-                },
-                {
-                    path: 'login',
-                    element: <LoginPage />
-                },
-                {
-                    path: 'signup',
-                    element: <SignupPage />
-                },
-                {
-                    path: 'createtask',
-                    element: <CreateTask />
-                }
-            ]
-        }
-    ])
+          index: true,
+          element: <DecidePage />,
+        },
+        {
+          path: "login",
+          element: <LoginPage />,
+        },
+        {
+          path: "signup",
+          element: <SignupPage />,
+        },
+        {
+          path: "createtask",
+          element: <CreateTask />,
+        },
+      ],
+    },
+  ]);
 
-    return (
-        <div className='min-h-screen max-w-full'>
-            {routes}        
-        </div>
-    )
+  return <div className="min-h-screen max-w-full">{routes}</div>;
 }
