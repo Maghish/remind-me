@@ -67,8 +67,13 @@ function AllTasksWrap() {
         </div>
         <div className="w-[30%] min-h-32 h-auto border-l-2 border-l-stone-600 pt-7 pl-8 ">
           <p className="font-mono text-white text-lg mb-7">{taskName}</p>
-          <p className="font-mono text-white text-sm mb-11">{taskDesc}</p>
-          <p className="font-mono text-white text-md">#{taskRank}</p>
+          <div className="overflow-y-auto scrollbar-hide h-[150px] max-h-[150px] mb-11">
+            <p className="font-mono text-white text-sm">{taskDesc}</p>
+          </div>
+          <p className="font-mono text-white text-md mb-11">#{taskRank}</p>
+          <button className="p-4 border-2 border-stone-600 font-mono text-white rounded-lg">
+            Edit
+          </button>
         </div>
       </>
     );

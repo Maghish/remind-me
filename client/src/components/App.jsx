@@ -11,7 +11,7 @@ import SignupPage from "../pages/SignupPage";
 
 import GetCookie from "../hooks/GetCookie";
 
-axios.defaults.baseURL = "https://remind-me-r5u3.onrender.com";
+axios.defaults.baseURL = "http://localhost:4000/";
 
 function DecidePage() {
   const token = GetCookie("userToken");
