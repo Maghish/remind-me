@@ -1,5 +1,9 @@
+import Navbar from "@/app/components/Navbar";
+
 export default function Home() {
   return (
-    <p className="">Hello world</p>
+    <>
+      <Navbar />
+    </>
   );
 }
