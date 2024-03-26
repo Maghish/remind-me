@@ -1,7 +1,10 @@
 import express from "express";
 import { Request, Response } from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
+dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -16,6 +19,9 @@ app.use("/api", async (req: Request, res: Response) => {
     message: "Hello world!" })
 })
 
-app.listen(4000, () => {
-  console.log("Listening on port 4000")
+mongoose.connect(process.env.MONGO_URI!).then(() => {
+  console.log("Connected to MongoDB Successfully");
+  app.listen(process.env.PORT, () => {
+    console.log("Listening on port " + process.env.PORT);
+  });
 })
