@@ -60,6 +60,26 @@ async function signupUser(req: Request, res: Response) {
   }
 }
 
+async function loginUser(req: Request, res: Response) {
+  try {
+    const { email, password } = req.body;
+    const foundUser = await UserModel.findOne({ email });
+
+    if (foundUser && (await compare(password, foundUser!.password))) {
+      res.status(200).json({
+        message: "Successfully authenticated user",
+        token: generateToken(foundUser._id),
+        userData: foundUser,
+      });
+    } else {
+      res.status(400).json({ message: "Password not correct" });
+    }
+  } catch (error: any) {
+    return res.status(400).json({ message: error });
+  }
+}
+
 export {
-  signupUser
+  signupUser,
+  loginUser
 };
