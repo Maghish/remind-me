@@ -1,9 +1,26 @@
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import axios from "axios";
+import SetCookie from "../util/SetCookie";
 
 function Loginform({ setLoginFormVisibility, setSignupFormVisibility }: any) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  function LoginUser() {
+    axios
+      .post("/auth/login", {
+        email: email,
+        password: password,
+      })
+      .then((response: any) => {
+        console.log(response);
+        SetCookie("token", response.data.token);
+        axios.defaults.headers.common["Authorization"] =
+          "Bearer " + response.data.token;
+        window.location.reload();
+      });
+  }
 
   return (
     <div className="absolute min-w-full min-h-full backdrop-blur-md flex items-center justify-center">
@@ -39,6 +56,7 @@ function Loginform({ setLoginFormVisibility, setSignupFormVisibility }: any) {
         <button
           type="button"
           className="bg-inherit border-2 border-stone-100 rounded-md p-3 px-6 w-fit font-mono text-sm text-stone-100 self-center hover:opacity-90"
+          onClick={LoginUser}
         >
           Log in
         </button>

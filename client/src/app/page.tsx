@@ -3,6 +3,9 @@
 import Loginform from "./components/Loginform";
 import Signupform from "./components/Signupform";
 import { useState } from "react";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:2000/api/"
 
 function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
