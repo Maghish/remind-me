@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+import authRoute from "./routes/auth.route";
+
 dotenv.config();
 const app = express();
 
@@ -14,14 +16,11 @@ app.use(
   })
 );
 
-app.use("/api", async (req: Request, res: Response) => {
-  res.status(200).json({
-    message: "Hello world!" })
-})
+app.use("/api/auth", authRoute);
 
 mongoose.connect(process.env.MONGO_URI!).then(() => {
   console.log("Connected to MongoDB Successfully");
   app.listen(process.env.PORT, () => {
     console.log("Listening on port " + process.env.PORT);
   });
-})
+});
