@@ -21,11 +21,11 @@ function Home() {
       >
         Login
       </button>
-      <button className="min-w-11 w-auto min-h-11 py-3 px-4 border-4 border-black bg-inherit rounded-md">
+      <button className="min-w-11 w-auto min-h-11 py-3 px-4 border-4 border-black bg-inherit rounded-md" onClick={() => {setSignupFormVisible(true)}}>
         Signup
       </button>
       {loginFormVisible ? <Loginform setLoginFormVisibility={(v: boolean) => setLoginFormVisible(v)} setSignupFormVisibility={(v: boolean) => setSignupFormVisible(v)} /> : ""}
-      {signupFormVisible ? <Signupform /> : ""}
+      {signupFormVisible ? <Signupform setLoginFormVisibility={(v: boolean) => setLoginFormVisible(v)} setSignupFormVisibility={(v: boolean) => setSignupFormVisible(v)} /> : ""}
     </div>
   );
 }
