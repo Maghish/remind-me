@@ -97,10 +97,15 @@ async function loginUser(req: Request, res: Response) {
 async function getUser(req: Request, res: Response) {
   try {
     const { username } = req.body;
-    const user = await UserModel.findOne({ username: username });
-    res
-      .status(200)
-      .json({ message: "Successfully found user", userData: user });
+    const user = await UserModel.findOne({ username: username }); 
+    if (user) {
+      res
+        .status(200)
+        .json({ message: "Successfully found user", userData: user });
+    }
+    else {
+      res.status(400).json({ message: "User not found" });
+    }
   } catch (error: any) {
     return res.status(400).json({ message: error });
   }
