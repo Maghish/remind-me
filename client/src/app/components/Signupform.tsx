@@ -1,10 +1,25 @@
+import axios from "axios";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import SetCookie from "../util/SetCookie";
 
 function Signupform({ setLoginFormVisibility, setSignupFormVisibility }: any) {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  function SignupUser() {
+    axios.post('/auth/signup', {
+      username: username, 
+      email: email,
+      password: password
+    }).then((response: any) => {
+      SetCookie("token", response.data.token);
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + response.data.token;
+      window.location.reload();
+    })
+  }
 
   return (
     <div className="absolute min-w-full min-h-full backdrop-blur-md flex items-center justify-center">
@@ -47,6 +62,7 @@ function Signupform({ setLoginFormVisibility, setSignupFormVisibility }: any) {
         <button
           type="button"
           className="bg-inherit border-2 border-stone-100 rounded-md p-3 px-6 w-fit font-mono text-sm text-stone-100 self-center hover:opacity-90"
+          onClick={SignupUser}
         >
           Sign up
         </button>
