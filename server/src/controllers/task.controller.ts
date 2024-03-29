@@ -1,6 +1,7 @@
 import TaskModel from "../models/task.model";
 import { Request, Response } from "express";
 import { getCurrentUserData } from "./auth.controller";
+import taskModel from "../models/task.model";
 
 async function createTask(req: Request, res: Response) {
   try {
@@ -15,19 +16,36 @@ async function createTask(req: Request, res: Response) {
         state: state,
       });
 
-      await newTask.save();
+      const savedTask = await newTask.save();
 
       return res.status(200).json({
         message: "Successfully created task!",
-        newTask: newTask,
+        newTask: savedTask,
       });
     }
-      
   } catch (error) {
     return res.status(400).json({ message: error });
-  } 
+  }
 }
 
-export {
-  createTask
+async function editTask(req: Request, res: Response) {
+  try {
+    const { id, name, description, rank, state } = req.body;
+    const task = await TaskModel.findById(id);
+    if (task) {
+      task.name = name;
+      task.description = description;
+      task.rank = rank;
+      task.state = state;
+      const editedTask = await task.save();
+      return res.status(200).json({
+        message: "Successfully edited the task",
+        editedTask: editedTask,
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
 }
+
+export { createTask, editTask };
