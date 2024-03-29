@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from "./contexts/authContext";
 import Navbar from "./components/Navbar";
 
-axios.defaults.baseURL = "http://localhost:2000/api/"
+axios.defaults.baseURL = "https://remind-me-r5u3.onrender.com"; //http://localhost:2000/api
 
 function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
