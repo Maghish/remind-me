@@ -36,6 +36,9 @@ function Home() {
       ) : (
         ""
       )}
+      <div className="mt-10 w-full h-auto p-6 items-center">
+        
+      </div>
     </div>
   );
 }

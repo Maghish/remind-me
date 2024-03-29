@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/authContext";
+import { AuthContext } from "../contexts/authContext"
 
 function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
   const [mobileNavLinks, setMobileNavLinks] = useState<boolean>(false);
@@ -105,7 +105,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
       {mode === "Guest" ? (
         <div className="hidden md:flex flex-row ml-auto gap-x-3 justify-end">
           <button
-            className="bg-inherit p-2 px-3 border-2 border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
             onClick={() => {
               setLoginFormVisibility(true);
             }}
@@ -113,7 +113,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
             Login
           </button>
           <button
-            className="bg-inherit p-2 px-3 border-2 border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
             onClick={() => {
               setSignupFormVisibility(true);
             }}
