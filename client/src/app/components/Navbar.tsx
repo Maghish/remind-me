@@ -14,7 +14,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
       <span className="text-2xl font-mono font-semibold tracking-widest cursor-pointer">
         Remind Me
       </span>
-      <div className="visible md:hidden ml-auto">
+      <div className="block md:hidden ml-auto">
         <GiHamburgerMenu
           size="24px"
           className="cursor-pointer"
@@ -31,20 +31,20 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
                     href="/"
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
                   >
-                    Create a task
+                    Create task
                   </Link>
                   <Link
                     href="/"
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
                   >
-                    View all tasks
+                    All tasks
                   </Link>
                 </>
               ) : (
                 ""
               )}
               <Link
-                href="https://github.com/Maghish/remind-me"
+                href="https://github.com/Maghish/remind-me.git"
                 className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
               >
                 Github
@@ -77,7 +77,54 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
           ""
         )}
       </div>
-      <div className=""></div>
+      <ul className="hidden md:flex md:flex-row md:gap-x-7 md:items-center ml-[120px]">
+        {mode === "User" ? (
+          <>
+            <Link
+              href="/"
+              className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+            >
+              Create task
+            </Link>
+            <Link
+              href="/"
+              className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+            >
+              All tasks
+            </Link>
+          </>
+        ) : (
+          ""
+        )}
+        <Link
+          href="https://github.com/Maghish/remind-me.git"
+          className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+        >
+          Github
+        </Link>
+      </ul>
+      {mode === "Guest" ? (
+        <div className="hidden md:flex flex-row ml-auto gap-x-3 justify-end">
+          <button
+            className="bg-inherit p-2 px-3 border-2 border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            onClick={() => {
+              setLoginFormVisibility(true);
+            }}
+          >
+            Login
+          </button>
+          <button
+            className="bg-inherit p-2 px-3 border-2 border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            onClick={() => {
+              setSignupFormVisibility(true);
+            }}
+          >
+            Signup
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </nav>
   );
 }
