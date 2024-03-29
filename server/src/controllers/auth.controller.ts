@@ -191,5 +191,6 @@ export {
   loginUser,
   getUser,
   getCurrentUser,
-  editUser
+  editUser,
+  getCurrentUserData
 };
