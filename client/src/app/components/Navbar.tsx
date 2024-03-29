@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { FaHamburger } from "react-icons/fa";
+import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useContext } from "react";

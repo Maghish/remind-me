@@ -23,7 +23,7 @@ function Signupform({ setLoginFormVisibility, setSignupFormVisibility }: any) {
 
   return (
     <div className="absolute min-w-full min-h-full backdrop-blur-md flex items-center justify-center">
-      <form className="relative min-w-[500px] w-auto min-h-[600px] h-auto bg-black p-10 rounded-lg flex flex-col gap-y-10">
+      <form className="relative min-w-fit md:min-w-[500px] w-auto min-h-[600px] h-auto bg-black p-7 sm:p-10 rounded-lg flex flex-col gap-y-10">
         <IoMdClose
           className="absolute self-end top-[25px] right-[30px] cursor-pointer"
           size="18px"
