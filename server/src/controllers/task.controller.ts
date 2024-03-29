@@ -48,4 +48,19 @@ async function editTask(req: Request, res: Response) {
   }
 }
 
-export { createTask, editTask };
+async function getTask(req: Request, res: Response) {
+  try {
+    const { id } = req.body;
+    if (id === "") {
+      const allTasks = await TaskModel.find({});
+      return res.status(200).json({ message: "Successfully fetched all tasks", task: allTasks })
+    } else {
+      const task = await TaskModel.findById(id);
+      return res.status(200).json({ message: "Successfully fetched task", task: task })
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error })
+  }
+}
+
+export { createTask, editTask, getTask };
