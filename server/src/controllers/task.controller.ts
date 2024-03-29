@@ -53,14 +53,34 @@ async function getTask(req: Request, res: Response) {
     const { id } = req.body;
     if (id === "") {
       const allTasks = await TaskModel.find({});
-      return res.status(200).json({ message: "Successfully fetched all tasks", task: allTasks })
+      return res
+        .status(200)
+        .json({ message: "Successfully fetched all tasks", task: allTasks });
     } else {
       const task = await TaskModel.findById(id);
-      return res.status(200).json({ message: "Successfully fetched task", task: task })
+      return res
+        .status(200)
+        .json({ message: "Successfully fetched task", task: task });
     }
   } catch (error) {
-    return res.status(400).json({ message: error })
+    return res.status(400).json({ message: error });
   }
 }
 
-export { createTask, editTask, getTask };
+async function changeTaskState(req: Request, res: Response) {
+  try {
+    const { id, state } = req.body;
+    const task = await TaskModel.findById(id);
+    task!.state = state;
+    const savedTask = await task!.save();
+    return res
+      .status(200)
+      .json({ message: "Successfully changed task state", task: savedTask });
+  } catch (error) {
+    return res.status(200).json({
+      message: error,
+    });
+  }
+}
+
+export { createTask, editTask, getTask, changeTaskState };
