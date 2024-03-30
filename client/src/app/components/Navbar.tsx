@@ -2,11 +2,19 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/authContext"
+import { AuthContext } from "../contexts/authContext";
+import axios from "axios";
+import RemoveCookie from "../util/RemoveCookie";
 
 function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
   const [mobileNavLinks, setMobileNavLinks] = useState<boolean>(false);
   const { mode, userData } = useContext(AuthContext);
+
+  function logoutUser() {
+    delete axios.defaults.headers.common["Authorization"];
+    RemoveCookie("token");
+    window.location.reload();
+  }
 
   return (
     <nav className="relative flex flex-row items-center py-3 px-7 min-w-screen w-screen min-h-[75px] max-h-[75px] bg-inherit border-b-2 border-stone-200">
@@ -105,7 +113,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
       {mode === "Guest" ? (
         <div className="hidden md:flex flex-row ml-auto gap-x-3 justify-end">
           <button
-            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold  font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
             onClick={() => {
               setLoginFormVisibility(true);
             }}
@@ -113,7 +121,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
             Login
           </button>
           <button
-            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
             onClick={() => {
               setSignupFormVisibility(true);
             }}
@@ -122,7 +130,11 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
           </button>
         </div>
       ) : (
-        ""
+        <div className="ml-auto">
+          <button className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition-opacity delay-150 duration-150 ease-in-out hover:opacity-90" onClick={logoutUser}>
+            Logout
+          </button>
+        </div>
       )}
     </nav>
   );
