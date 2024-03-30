@@ -30,13 +30,11 @@ async function createTask(req: Request, res: Response) {
 
 async function editTask(req: Request, res: Response) {
   try {
-    const { id, name, description, rank, state } = req.body;
+    const { id, name, description } = req.body;
     const task = await TaskModel.findById(id);
     if (task) {
       task.name = name;
       task.description = description;
-      task.rank = rank;
-      task.state = state;
       const editedTask = await task.save();
       return res.status(200).json({
         message: "Successfully edited the task",
@@ -83,4 +81,19 @@ async function changeTaskState(req: Request, res: Response) {
   }
 }
 
-export { createTask, editTask, getTask, changeTaskState };
+async function notAvailableRanks(req: Request, res: Response) { 
+  try {
+    const allTasks = await TaskModel.find({});
+    let allUsedRanks: number[] = [];
+    allTasks.forEach((task) => {
+      allUsedRanks.push(task.rank);
+    })
+    return res.status(200).json({ message: "Successfully fetched all used ranks", allUsedRanks: allUsedRanks })
+  } catch (error) {
+    return res.status(400).json({ message: error });  
+  }
+}
+async function updateTaskRank() { }
+
+
+export { createTask, editTask, getTask, changeTaskState, notAvailableRanks };
