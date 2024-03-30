@@ -81,19 +81,47 @@ async function changeTaskState(req: Request, res: Response) {
   }
 }
 
-async function notAvailableRanks(req: Request, res: Response) { 
+async function notAvailableRanks(req: Request, res: Response) {
   try {
     const allTasks = await TaskModel.find({});
     let allUsedRanks: number[] = [];
     allTasks.forEach((task) => {
       allUsedRanks.push(task.rank);
-    })
-    return res.status(200).json({ message: "Successfully fetched all used ranks", allUsedRanks: allUsedRanks })
+    });
+    return res
+      .status(200)
+      .json({
+        message: "Successfully fetched all used ranks",
+        allUsedRanks: allUsedRanks,
+      });
   } catch (error) {
-    return res.status(400).json({ message: error });  
+    return res.status(400).json({ message: error });
   }
 }
-async function updateTaskRank() { }
+async function updateTaskRank(req: Request, res: Response) {
+  try {
+    const { id, rank } = req.body;
+    const allTasks = await TaskModel.find({});
+    allTasks.forEach((task) => {
+      if (Number(task.rank) === Number(rank)) {
+        return res
+          .status(400)
+          .json({ message: "The rank is already given to an existing task" });
+      }
+    });
 
+    const task = await TaskModel.findById(id);
+    task!.rank = rank;
+    const savedTask = await task!.save();
+    return res
+      .status(200)
+      .json({
+        message: "Successfully updated rank of the task",
+        task: savedTask,
+      });
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+}
 
-export { createTask, editTask, getTask, changeTaskState, notAvailableRanks };
+export { createTask, editTask, getTask, changeTaskState, notAvailableRanks, updateTaskRank };
