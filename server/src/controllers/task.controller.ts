@@ -1,7 +1,6 @@
 import TaskModel from "../models/task.model";
 import { Request, Response } from "express";
 import { getCurrentUserData } from "./auth.controller";
-import taskModel from "../models/task.model";
 
 async function createTask(req: Request, res: Response) {
   try {
@@ -51,7 +50,7 @@ async function getTask(req: Request, res: Response) {
     const { id } = req.body;
     if (id === "") {
       const currentUser = await getCurrentUserData(req);
-      const allTasks = await TaskModel.find({ author: currentUser!.username });
+      const allTasks = await TaskModel.find({ author: currentUser!.username }).sort("rank");
       return res
         .status(200)
         .json({ message: "Successfully fetched all tasks", task: allTasks });

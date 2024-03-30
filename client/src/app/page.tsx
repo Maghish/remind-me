@@ -6,8 +6,9 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "./contexts/authContext";
 import Navbar from "./components/Navbar";
+import TaskList from "./components/subcomponents/TaskList";
 
-axios.defaults.baseURL = "https://remind-me-r5u3.onrender.com/api"; //http://localhost:2000/api
+axios.defaults.baseURL = "http://localhost:2000/api"; //http://localhost:2000/api //https://remind-me-r5u3.onrender.com/api
 
 function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
@@ -56,11 +57,9 @@ function Home() {
       {mode === "User" ? (
         <div className="mt-10 w-full h-auto p-6 flex justify-center">
           {allTasks.length > 0 ? (
-            allTasks.map((task) => {
-              return <p>{task.name}</p>;
-            })
+            <TaskList allTasks={allTasks} />
           ) : (
-            <div className="w-[100px] h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-white">No tasks found</div>
+            <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-">No tasks found</div>
           )}
         </div>
       ) : (
