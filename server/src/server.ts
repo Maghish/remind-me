@@ -1,10 +1,10 @@
 import express from "express";
-import { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import authRoute from "./routes/auth.route";
+import taskRoute from "./routes/task.route";
 
 dotenv.config();
 const app = express();
@@ -17,6 +17,7 @@ app.use(
 );
 
 app.use("/api/auth", authRoute);
+app.use("/api/task", taskRoute);
 
 mongoose.connect(process.env.MONGO_URI!).then(() => {
   console.log("Connected to MongoDB Successfully");
