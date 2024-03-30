@@ -76,7 +76,9 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
                   </button>
                 </div>
               ) : (
-                ""
+                <div className="mt-4 w-full">
+                  <button className="bg-inherit w-full p-2 px-3 border-2 border-white rounded-md text-sm text-white font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90" onClick={logoutUser}>Logout</button>
+                </div>
               )}
             </ul>
           </div>
@@ -130,8 +132,11 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
           </button>
         </div>
       ) : (
-        <div className="ml-auto">
-          <button className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition-opacity delay-150 duration-150 ease-in-out hover:opacity-90" onClick={logoutUser}>
+        <div className="ml-auto hidden md:block">
+          <button
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition-opacity delay-150 duration-150 ease-in-out hover:opacity-90"
+            onClick={logoutUser}
+          >
             Logout
           </button>
         </div>
