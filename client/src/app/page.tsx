@@ -2,7 +2,7 @@
 
 import Loginform from "./components/Loginform";
 import Signupform from "./components/Signupform";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "./contexts/authContext";
 import Navbar from "./components/Navbar";
@@ -13,6 +13,23 @@ function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
   const [signupFormVisible, setSignupFormVisible] = useState<boolean>(false);
   const { mode, userData } = useContext(AuthContext);
+  const [allTasks, setAllTasks] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function getAllTasks() {
+      const res = await axios.post("/task/gettask", {
+        id: "",
+      });
+      if (res.data.task) {
+        setAllTasks(res.data.task);
+      } else {
+      }
+    }
+
+    if (mode === "User") {
+      getAllTasks();
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-x-4">
@@ -36,9 +53,23 @@ function Home() {
       ) : (
         ""
       )}
-      <div className="mt-10 w-full h-auto p-6 items-center">
-        
-      </div>
+      {mode === "User" ? (
+        <div className="mt-10 w-full h-auto p-6 flex justify-center">
+          {allTasks.length > 0 ? (
+            allTasks.map((task) => {
+              return <p>{task.name}</p>;
+            })
+          ) : (
+            <div className="w-[100px] h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-white">No tasks found</div>
+          )}
+        </div>
+      ) : (
+        <div className="mt-10 w-full h-auto p-6 flex justify-center">
+          <p className="text-4xl font-mono tracking-widest">
+            You must be logged in to use this application!
+          </p>
+        </div>
+      )}
     </div>
   );
 }

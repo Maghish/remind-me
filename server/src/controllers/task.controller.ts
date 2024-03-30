@@ -50,7 +50,8 @@ async function getTask(req: Request, res: Response) {
   try {
     const { id } = req.body;
     if (id === "") {
-      const allTasks = await TaskModel.find({});
+      const currentUser = await getCurrentUserData(req);
+      const allTasks = await TaskModel.find({ author: currentUser!.username });
       return res
         .status(200)
         .json({ message: "Successfully fetched all tasks", task: allTasks });
