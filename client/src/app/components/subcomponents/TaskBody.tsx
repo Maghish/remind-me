@@ -8,13 +8,15 @@ function TaskBody({ name, description, rank, state }: TaskBodyComponentProps) {
           {name}
         </span>
         <div className="overflow-y-auto">
-          <p className="text-black text-sm font-mono transition delay-75 duration-200 ease-ou group-hover:text-opacity-50">
+          <p className="text-black text-sm font-mono transition delay-75 duration-200 ease-ou5 group-hover:text-opacity-50">
             {description}
           </p>
         </div>
-        <p className="mt-auto w-full text-black text-sm font-mono text-end transition delay-75 duration-200 ease-out group-hover:text-opacity-50">
-          #{rank}
-        </p>
+        <div className="w-full mt-auto flex flex-row">
+          <p className="mt-auto w-full text-black text-sm font-mono text-end transition delay-75 duration-200 ease-out group-hover:text-opacity-50">
+            #{rank}
+          </p>
+        </div>
       </div>
     </>
   );
