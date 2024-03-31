@@ -44,7 +44,13 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
                     href="/"
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
                   >
-                    All tasks
+                    Saved tasks
+                  </Link>
+                  <Link
+                    href="/"
+                    className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
+                  >
+                    Closed tasks
                   </Link>
                 </>
               ) : (
@@ -104,7 +110,13 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
               href="/"
               className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
             >
-              All tasks
+              Saved tasks
+            </Link>
+            <Link
+              href="/"
+              className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+            >
+              Closed tasks
             </Link>
           </>
         ) : (
