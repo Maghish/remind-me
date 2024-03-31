@@ -1,4 +1,4 @@
-import { TaskBodyComponentProps } from "../../../../next-env";
+import { TaskBodyComponentProps } from "../../../../env";
 
 function TaskBody({ name, description, rank, state }: TaskBodyComponentProps) {
   return (
