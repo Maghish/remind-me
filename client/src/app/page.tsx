@@ -55,7 +55,7 @@ function Home() {
         ""
       )}
       {mode === "User" ? (
-        <div className="mt-10 w-full h-auto p-6 flex justify-center">
+        <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
           {allTasks.length > 0 ? (
             <TaskList allTasks={allTasks} />
           ) : (
@@ -63,7 +63,7 @@ function Home() {
           )}
         </div>
       ) : (
-        <div className="mt-10 w-full h-auto p-6 flex justify-center">
+        <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
           <p className="text-4xl font-mono tracking-widest">
             You must be logged in to use this application!
           </p>

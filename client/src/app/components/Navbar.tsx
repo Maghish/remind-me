@@ -17,7 +17,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
   }
 
   return (
-    <nav className="relative flex flex-row items-center py-3 px-7 min-w-screen w-screen min-h-[75px] max-h-[75px] bg-inherit border-b-2 border-stone-200">
+    <nav className="fixed flex flex-row items-center py-3 px-7 min-w-screen w-screen min-h-[75px] max-h-[75px] bg-white border-b-2 border-stone-200">
       <span className="text-2xl font-mono font-semibold tracking-widest cursor-pointer">
         Remind Me
       </span>
@@ -77,7 +77,12 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
                 </div>
               ) : (
                 <div className="mt-4 w-full">
-                  <button className="bg-inherit w-full p-2 px-3 border-2 border-white rounded-md text-sm text-white font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90" onClick={logoutUser}>Logout</button>
+                  <button
+                    className="bg-inherit w-full p-2 px-3 border-2 border-white rounded-md text-sm text-white font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+                    onClick={logoutUser}
+                  >
+                    Logout
+                  </button>
                 </div>
               )}
             </ul>
@@ -115,7 +120,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
       {mode === "Guest" ? (
         <div className="hidden md:flex flex-row ml-auto gap-x-3 justify-end">
           <button
-            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold  font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold  font-mono tracking-widest transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-60"
             onClick={() => {
               setLoginFormVisibility(true);
             }}
@@ -123,7 +128,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
             Login
           </button>
           <button
-            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition-opacity delay-150 ease-in-out duration-150 hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-60"
             onClick={() => {
               setSignupFormVisibility(true);
             }}
@@ -134,7 +139,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
       ) : (
         <div className="ml-auto hidden md:block">
           <button
-            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition-opacity delay-150 duration-150 ease-in-out hover:opacity-90"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-60"
             onClick={logoutUser}
           >
             Logout
