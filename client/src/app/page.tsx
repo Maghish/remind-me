@@ -8,7 +8,7 @@ import { AuthContext } from "./contexts/authContext";
 import Navbar from "./components/Navbar";
 import TaskList from "./components/subcomponents/TaskList";
 
-axios.defaults.baseURL = "http://localhost:2000/api"; //http://localhost:2000/api //https://remind-me-r5u3.onrender.com/api
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL; //http://localhost:2000/api //https://remind-me-r5u3.onrender.com/api
 
 function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
@@ -59,7 +59,9 @@ function Home() {
           {allTasks.length > 0 ? (
             <TaskList allTasks={allTasks} />
           ) : (
-            <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-">No tasks found</div>
+            <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
+              No tasks found
+            </div>
           )}
         </div>
       ) : (
