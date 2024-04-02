@@ -18,9 +18,9 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
 
   return (
     <nav className="fixed flex flex-row items-center py-3 px-7 min-w-screen w-screen min-h-[75px] max-h-[75px] bg-white border-b-2 border-stone-200">
-      <span className="text-2xl font-mono font-semibold tracking-widest cursor-pointer">
+      <Link href="/" className="text-2xl font-mono font-semibold tracking-widest cursor-pointer">
         Remind Me
-      </span>
+      </Link>
       <div className="block md:hidden ml-auto">
         <GiHamburgerMenu
           size="24px"
@@ -41,13 +41,13 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
                     Create task
                   </h3>
                   <Link
-                    href="/"
+                    href="/savedtasks"
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
                   >
                     Saved tasks
                   </Link>
                   <Link
-                    href="/"
+                    href="/closedtasks"
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
                   >
                     Closed tasks
@@ -113,7 +113,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
               Saved tasks
             </Link>
             <Link
-              href="/"
+              href="/closedtasks"
               className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
             >
               Closed tasks
