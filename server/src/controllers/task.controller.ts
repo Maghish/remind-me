@@ -50,10 +50,26 @@ async function getTask(req: Request, res: Response) {
     const { id } = req.body;
     if (id === "") {
       const currentUser = await getCurrentUserData(req);
-      const allTasks = await TaskModel.find({ author: currentUser!.username }).sort("rank");
-      return res
-        .status(200)
-        .json({ message: "Successfully fetched all tasks", task: allTasks });
+      const allTasks = await TaskModel.find({
+        author: currentUser!.username,
+        state: "Open",
+      }).sort("rank");
+      return res.status(200).json({
+        message: "Successfully fetched all open tasks",
+        task: allTasks,
+      });
+    }
+
+    if (id === "Saved") {
+      const currentUser = await getCurrentUserData(req);
+      const allTasks = await TaskModel.find({
+        author: currentUser!.username,
+        state: "Saved",
+      }).sort("rank");
+      return res.status(200).json({
+        message: "Successfully fetched all saved tasks",
+        task: allTasks,
+      });
     } else {
       const task = await TaskModel.findById(id);
       return res
@@ -88,12 +104,10 @@ async function notAvailableRanks(req: Request, res: Response) {
     allTasks.forEach((task) => {
       allUsedRanks.push(task.rank);
     });
-    return res
-      .status(200)
-      .json({
-        message: "Successfully fetched all used ranks",
-        allUsedRanks: allUsedRanks,
-      });
+    return res.status(200).json({
+      message: "Successfully fetched all used ranks",
+      allUsedRanks: allUsedRanks,
+    });
   } catch (error) {
     return res.status(400).json({ message: error });
   }
@@ -113,15 +127,20 @@ async function updateTaskRank(req: Request, res: Response) {
     const task = await TaskModel.findById(id);
     task!.rank = rank;
     const savedTask = await task!.save();
-    return res
-      .status(200)
-      .json({
-        message: "Successfully updated rank of the task",
-        task: savedTask,
-      });
+    return res.status(200).json({
+      message: "Successfully updated rank of the task",
+      task: savedTask,
+    });
   } catch (error) {
     return res.status(400).json({ message: error });
   }
 }
 
-export { createTask, editTask, getTask, changeTaskState, notAvailableRanks, updateTaskRank };
+export {
+  createTask,
+  editTask,
+  getTask,
+  changeTaskState,
+  notAvailableRanks,
+  updateTaskRank,
+};
