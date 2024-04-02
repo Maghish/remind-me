@@ -2,17 +2,21 @@
 
 import Loginform from "./components/Loginform";
 import Signupform from "./components/Signupform";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { AuthContext } from "./contexts/authContext";
 import Navbar from "./components/Navbar";
 import TaskList from "./components/subcomponents/TaskList";
+
+import { AuthContext } from "./contexts/authContext";
+
+import { useContext, useEffect, useState } from "react";
+import axios from "axios"
+import CreateTaskForm from "./components/CreateTaskForm";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL; //http://localhost:2000/api //https://remind-me-r5u3.onrender.com/api
 
 function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
   const [signupFormVisible, setSignupFormVisible] = useState<boolean>(false);
+  const [createTaskForm, setCreateTaskForm] = useState<boolean>(false);
   const { mode, userData } = useContext(AuthContext);
   const [allTasks, setAllTasks] = useState<any[]>([]);
 
@@ -37,7 +41,17 @@ function Home() {
       <Navbar
         setLoginFormVisibility={(v: boolean) => setLoginFormVisible(v)}
         setSignupFormVisibility={(v: boolean) => setSignupFormVisible(v)}
+        setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
       />
+      {createTaskForm ? (
+        <CreateTaskForm
+          closeForm={() => {
+            setCreateTaskForm(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
       {loginFormVisible ? (
         <Loginform
           setLoginFormVisibility={(v: boolean) => setLoginFormVisible(v)}

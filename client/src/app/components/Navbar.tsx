@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/authContext";
 import axios from "axios";
 import RemoveCookie from "../util/RemoveCookie";
 
-function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
+function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTaskForm }: any) {
   const [mobileNavLinks, setMobileNavLinks] = useState<boolean>(false);
   const { mode, userData } = useContext(AuthContext);
 
@@ -34,12 +34,12 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
             <ul className="flex flex-col gap-y-3">
               {mode === "User" ? (
                 <>
-                  <Link
-                    href="/"
+                  <h3
+                    onClick={() => {setCreateTaskForm(true)}}                  
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
                   >
                     Create task
-                  </Link>
+                  </h3>
                   <Link
                     href="/"
                     className="text-white text-sm font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90"
@@ -100,12 +100,12 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility }: any) {
       <ul className="hidden md:flex md:flex-row md:gap-x-7 md:items-center ml-[120px]">
         {mode === "User" ? (
           <>
-            <Link
-              href="/"
+            <h3
+              onClick={() => {setCreateTaskForm(true)}}
               className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
             >
               Create task
-            </Link>
+            </h3>
             <Link
               href="/"
               className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
