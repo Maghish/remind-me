@@ -1,7 +1,6 @@
 import TaskBody from "./TaskBody";
 
 function TaskList({ allTasks }: any) {
-  console.log(allTasks);
   return (
     <div className="flex flex-col gap-y-4">
       {allTasks.map((task: any) => {

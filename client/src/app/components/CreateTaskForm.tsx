@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 function CreateTaskForm({ closeForm }: any) {
@@ -7,6 +8,31 @@ function CreateTaskForm({ closeForm }: any) {
   const [taskRank, setTaskRank] = useState<number>(0);
   const [notAvailableRanks, setNotAvailableRanks] = useState<number[]>();
   const [errorMessage, setErrorMessage] = useState<string | false>(false);
+
+  useEffect(() => {
+    async function getNotAvailableRanks() {
+      const res = await axios.get("/task/notavailableranks");
+      setNotAvailableRanks(res.data.allUsedRanks);
+    }
+
+    getNotAvailableRanks();
+  }, [])
+
+  function createTask() {
+    if (errorMessage === false) {
+      axios.post("/task/createtask", {
+        name: taskName, 
+        description: taskDescription, 
+        rank: taskRank, 
+        state: "Open"
+      })
+        .then(response => {
+          window.location.reload();
+      }) 
+    }
+
+    else {}
+  }
 
   return (
     <div className="fixed min-w-full min-h-full backdrop-blur-lg flex items-center justify-center z-10">
@@ -31,7 +57,7 @@ function CreateTaskForm({ closeForm }: any) {
             }}
           ></input>
           <textarea
-            className="w-full min-h-[200px] px-4 py-3 bg-stone-100 outline-none rounded-md font-mono text-black placeholder:font-mono placeholder:text-stone-400"
+            className="w-full min-h-[200px] px-4 py-3 bg-stone-100 outline-none rounded-md font-mono text-sm text-black placeholder:font-mono placeholder:text-stone-400 placeholder:text-sm"
             placeholder="Enter task description"
             onChange={(e) => {
               setTaskDescription(e.target.value);
@@ -41,24 +67,31 @@ function CreateTaskForm({ closeForm }: any) {
             <input
               type="number"
               className="w-full px-4 py-3 bg-stone-100 outline-none rounded-md font-mono text-black placeholder:font-mono placeholder:text-stone-400"
+              min="1"
+              max="100"
               placeholder="Set task rank"
               onChange={(e) => {
-                if (e.target.value in notAvailableRanks!) {
+                if (notAvailableRanks!.includes(Number(e.target.value))) {
                   setErrorMessage(
                     "Rank already given for another task, please try new one"
                   );
+                } else {
+                  setTaskRank(Number(e.target.value));
+                  setErrorMessage(false);
                 }
               }}
             ></input>
-            {errorMessage ? (
-              <span className="text-sm text-red-400 font-mono">
+            {errorMessage != false ? (
+              <span className="m-0 p-0 text-sm text-red-400 font-mono tracking-tight text-center">
                 {errorMessage}
               </span>
             ) : (
               ""
             )}
-            <button className="bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center hover:border-opacity-80 hover:text-opacity-90">Create</button>
           </div>
+          <button type="button" className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70" onClick={createTask} >
+            Create
+          </button>
         </div>
       </form>
     </div>
