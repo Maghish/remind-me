@@ -107,7 +107,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
               Create task
             </h3>
             <Link
-              href="/"
+              href="/savedtasks"
               className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
             >
               Saved tasks
