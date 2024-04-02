@@ -70,6 +70,18 @@ async function getTask(req: Request, res: Response) {
         message: "Successfully fetched all saved tasks",
         task: allTasks,
       });
+    }
+    
+    if (id === "Closed") {
+      const currentUser = await getCurrentUserData(req);
+      const allTasks = await TaskModel.find({
+        author: currentUser!.username,
+        state: "Closed",
+      }).sort("rank");
+      return res.status(200).json({
+        message: "Successfully fetched all closed tasks",
+        task: allTasks,
+      });
     } else {
       const task = await TaskModel.findById(id);
       return res
