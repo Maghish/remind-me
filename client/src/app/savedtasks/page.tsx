@@ -42,7 +42,10 @@ function SavedTasks() {
         ""
       ) : (
         <>
-          <Navbar />
+          <Navbar
+            currentPage="SavedTasks"
+            setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
+          />
           {createTaskForm ? (
             <CreateTaskForm
               closeForm={() => {

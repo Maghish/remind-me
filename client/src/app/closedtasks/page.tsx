@@ -38,7 +38,10 @@ function ClosedTasks() {
         ""
       ) : (
         <>
-          <Navbar setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)} />
+          <Navbar
+            currentPage="ClosedTasks"
+            setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
+          />
           {createTaskForm ? (
             <CreateTaskForm
               closeForm={() => {

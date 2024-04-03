@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/authContext";
 import axios from "axios";
 import RemoveCookie from "../util/RemoveCookie";
 
-function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTaskForm }: any) {
+function Navbar({ currentPage, setLoginFormVisibility, setSignupFormVisibility, setCreateTaskForm }: any) {
   const [mobileNavLinks, setMobileNavLinks] = useState<boolean>(false);
   const { mode, userData } = useContext(AuthContext);
 
@@ -108,13 +108,13 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
             </h3>
             <Link
               href="/savedtasks"
-              className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+              className={`text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90 ${currentPage === "SavedTasks" ? "underline underline-offset-4" : "hover:underline hover:underline-offset-4"}`}
             >
               Saved tasks
             </Link>
             <Link
               href="/closedtasks"
-              className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+              className={`text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90 ${currentPage === "ClosedTasks" ? "underline underline-offset-4" : "hover:underline hover:underline-offset-4"}`}
             >
               Closed tasks
             </Link>
@@ -124,7 +124,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
         )}
         <Link
           href="https://github.com/Maghish/remind-me.git"
-          className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75  ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
+          className="text-black text-sm font-semibold font-mono cursor-pointer tracking-widest transition-all delay-75 duration-75 ease-in-out hover:opacity-90 hover:underline hover:underline-offset-4"
         >
           Github
         </Link>
@@ -132,7 +132,7 @@ function Navbar({ setLoginFormVisibility, setSignupFormVisibility, setCreateTask
       {mode === "Guest" ? (
         <div className="hidden md:flex flex-row ml-auto gap-x-3 justify-end">
           <button
-            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold  font-mono tracking-widest transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-60"
+            className="bg-inherit p-2 px-3 border-[3px] border-black rounded-md text-sm text-black font-semibold font-mono tracking-widest transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-60"
             onClick={() => {
               setLoginFormVisibility(true);
             }}
