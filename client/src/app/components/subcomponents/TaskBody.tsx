@@ -1,18 +1,22 @@
 import { TaskBodyComponentProps } from "../../../../env";
 import { useContext } from "react";
-import { HoverContext } from "@/app/contexts/hoverContext";
+import { CurrentTaskContext } from "@/app/contexts/CurrentTaskContext";
 
-function TaskBody({ id, name, description, rank, state }: TaskBodyComponentProps) {
-  const { setTaskDetails } = useContext(HoverContext);
-
-  function handleClick() {
-    setTaskDetails([
-      name, description, rank, state
-    ])
-  }
+function TaskBody({
+  id,
+  name,
+  description,
+  rank,
+  state,
+}: TaskBodyComponentProps) {
+  const { addTaskDetails } = useContext(CurrentTaskContext);
 
   return (
-    <div id={id} className="group w-auto sm:w-[470px] h-[140px] border-[3px] border-black rounded-lg cursor-pointer p-5 px-7 flex flex-col transition delay-75 duration-200 ease-out hover:border-opacity-30 hover:text-opacity-50" onClick={handleClick}>
+    <div
+      id={id}
+      className="group w-auto sm:w-[470px] h-[140px] border-[3px] border-black rounded-lg cursor-pointer p-5 px-7 flex flex-col transition delay-75 duration-200 ease-out hover:border-opacity-30 hover:text-opacity-50"
+      onClick={() => {addTaskDetails([name, description, rank, state])}}
+    >
       <span className="text-black font-mono tracking-widest mb-2 transition delay-75 duration-200 ease-out group-hover:text-opacity-50">
         {name}
       </span>
