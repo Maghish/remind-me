@@ -6,10 +6,12 @@ import Navbar from "./components/Navbar";
 import TaskList from "./components/subcomponents/TaskList";
 
 import { AuthContext } from "./contexts/authContext";
+import { HoverContext } from "./contexts/hoverContext";
 
 import { useContext, useEffect, useState } from "react";
 import axios from "axios"
 import CreateTaskForm from "./components/CreateTaskForm";
+import CurrentTaskBody from "./components/subcomponents/CurrentTaskBody";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL; //http://localhost:2000/api //https://remind-me-r5u3.onrender.com/api
 
@@ -17,6 +19,7 @@ function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
   const [signupFormVisible, setSignupFormVisible] = useState<boolean>(false);
   const [createTaskForm, setCreateTaskForm] = useState<boolean>(false);
+  const [taskDetails, setTaskDetails] = useState<any>(null);
   const { mode, userData } = useContext(AuthContext);
   const [allTasks, setAllTasks] = useState<any[]>([]);
 
@@ -69,9 +72,12 @@ function Home() {
         ""
       )}
       {mode === "User" ? (
-        <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
+        <div className="mt-[90px] w-full h-auto p-6 flex flex-row px-40">
           {allTasks.length > 0 ? (
-            <TaskList allTasks={allTasks} />
+            <HoverContext.Provider value={{ taskDetails: taskDetails, setTaskDetails: setTaskDetails }}>
+              <TaskList allTasks={allTasks} />
+              <CurrentTaskBody />
+            </HoverContext.Provider>
           ) : (
             <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
               No tasks found
