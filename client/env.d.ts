@@ -1,14 +1,22 @@
 /// <reference types="next" />
 /// <reference types="next/image-types/global" />
 
-interface TaskBodyComponentProps {
-  id: string;
-  name: string,
-  description: string,
-  rank: number,
-  state: ["Open", "Closed", "Saved"]
+interface TaskType {
+  [
+    name: string,
+    description: string,
+    rank: number,
+    state: ["Open", "Closed", "Saved"], 
+  ];
 }
 
-export {
-  TaskBodyComponentProps
+interface TaskBodyComponentProps {
+  id: string;
+  name: string;
+  description: string;
+  rank: number;
+  state: ["Open", "Closed", "Saved"];
+  setCurrentTaskDetails: (v: TaskType) => void;
 }
+
+export { TaskBodyComponentProps, TaskType };
