@@ -1,21 +1,25 @@
-import { useContext, useState } from "react";
-import { CurrentTaskContext } from "@/app/contexts/CurrentTaskContext";
+import { useEffect, useState } from "react";
 
-function CurrentTaskBody() {
-  const { taskDetails } = useContext(CurrentTaskContext);
+function CurrentTaskBody({ taskDetails }: any) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [rank, setRank] = useState<number>();
   const [state, setState] = useState<"Open" | "Closed" | "Saved" | string>("Open");
+  const [count, setCount] = useState<number>(0);
 
-  if (taskDetails && taskDetails.length === 4) {
-    setName(taskDetails[0].toString());
-    setDescription(taskDetails[1].toString());
-    setRank(Number(taskDetails[2]));
-    setState(taskDetails[3].toString());
-  }
+  useEffect(() => {
+    console.log(taskDetails, count);
+    setCount(count + 1);
+    if (taskDetails !== null && taskDetails !== undefined) {
+      console.log(taskDetails[0]);
+      setName(taskDetails[0]);
+      setDescription(taskDetails[1]);
+      setRank(taskDetails[2]);
+      setState(taskDetails[3]);
+    }
+  }, [count])
 
-  return <p>{taskDetails ? taskDetails[0] : ""}</p>;
+  return <p>{name !== "" ? name : "Didn't work mate.. :("}</p>;
 }
 
 export default CurrentTaskBody;

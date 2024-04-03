@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar";
 import TaskList from "./components/subcomponents/TaskList";
 
 import { AuthContext } from "./contexts/authContext";
-import { CurrentTaskContext } from "./contexts/CurrentTaskContext";
 
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -19,7 +18,6 @@ function Home() {
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
   const [signupFormVisible, setSignupFormVisible] = useState<boolean>(false);
   const [createTaskForm, setCreateTaskForm] = useState<boolean>(false);
-  const [taskDetails, setTaskDetails] = useState<any[]>([]);
   const { mode, userData } = useContext(AuthContext);
   const [allTasks, setAllTasks] = useState<any[]>([]);
 
@@ -72,23 +70,15 @@ function Home() {
         ""
       )}
       {mode === "User" ? (
-        <div className="mt-[90px] w-full h-auto p-6 flex flex-row px-40">
+        <>
           {allTasks.length > 0 ? (
-            <CurrentTaskContext.Provider
-              value={{
-                taskDetails: taskDetails,
-                addTaskDetails: (v) => setTaskDetails(v),
-              }}
-            >
-              <TaskList allTasks={allTasks} />
-              <CurrentTaskBody />
-            </CurrentTaskContext.Provider>
+            <TaskList allTasks={allTasks} />
           ) : (
             <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
               No tasks found
             </div>
           )}
-        </div>
+        </>
       ) : (
         <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
           <p className="text-4xl font-mono tracking-widest">
