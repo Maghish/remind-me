@@ -2,6 +2,7 @@
 /// <reference types="next/image-types/global" />
 
 interface TaskBodyComponentProps {
+  id: string;
   name: string,
   description: string,
   rank: number,
