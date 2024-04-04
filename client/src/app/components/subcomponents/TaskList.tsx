@@ -8,7 +8,7 @@ function TaskList({ allTasks }: any) {
 
   return (
     <div className="mt-[90px] w-full h-auto p-6 flex flex-row px-40 gap-x-40">
-      <div className="flex flex-col gap-y-4 max-h-screen max-w-[470px] flex-grow-0 flex-shrink-0 flex-nowrap overflow-y-scroll">
+      <div className="flex flex-col gap-y-4 max-h-[600px] max-w-[470px] flex-grow-0 flex-shrink-0 flex-nowrap overflow-auto">
         {allTasks.map((task: any) => {
           return (
             <TaskBody

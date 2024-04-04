@@ -25,16 +25,22 @@ function CurrentTaskDiv({ taskDetails }: any) {
           <h2 className="font-mono tracking-wider text-black text-xl font-semibold">
             {name}
           </h2>
-          <div className="min-h-[350px] max-h-[350px] overflow-y-auto flex">
-            <span className="text-base font-mono text-black text-wrap">{description}</span>
-          </div>
-          <div className="flex flex-row justify-between w-full items-center">
+          <div className="flex flex-row gap-x-[240px] justify-center w-full items-center">
             <StateBox state={state} />
-            <p className="font-mono text-black font-semibold text-lg">#{rank}</p>
+            <p className="font-mono text-black font-semibold text-lg">
+              #{rank}
+            </p>
+          </div>
+          <div className="min-h-[350px] max-h-[350px] overflow-y-auto flex">
+            <span className="text-base font-mono text-black text-wrap">
+              {description}
+            </span>
           </div>
         </div>
       ) : (
-        <div className="w-full min-h-[70px] h-max mt-6 bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">Please select a task to display</div>
+        <div className="w-full min-h-[70px] h-max mt-6 bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
+          Please select a task to display
+        </div>
       )}
     </>
   );
