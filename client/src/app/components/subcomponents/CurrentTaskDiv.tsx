@@ -5,9 +5,7 @@ function CurrentTaskDiv({ taskDetails }: any) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [rank, setRank] = useState<number>();
-  const [state, setState] = useState<"Open" | "Closed" | "Saved">(
-    "Open"
-  );
+  const [state, setState] = useState<"Open" | "Closed" | "Saved">("Open");
 
   useEffect(() => {
     if (taskDetails !== null && taskDetails !== undefined) {
@@ -23,18 +21,29 @@ function CurrentTaskDiv({ taskDetails }: any) {
       {name && description && rank && state ? (
         <div className="w-full h-max flex flex-col gap-y-7 items-center">
           <h2 className="font-mono tracking-wider text-black text-xl font-semibold">
-            {name}
+            {name}{" "}
+            <span className="font-mono text-black font-semibold text-lg">
+              (#{rank})
+            </span>
           </h2>
-          <div className="flex flex-row gap-x-[240px] justify-center w-full items-center">
-            <StateBox state={state} />
-            <p className="font-mono text-black font-semibold text-lg">
-              #{rank}
-            </p>
-          </div>
+          <div className="flex flex-row justify-center gap-x-[293px] w-full items-center"></div>
           <div className="min-h-[350px] max-h-[350px] overflow-y-auto flex">
             <span className="text-base font-mono text-black text-wrap">
               {description}
             </span>
+          </div>
+          <div className="flex flex-row w-full items-center">
+            <div className="self-start">
+              <StateBox state={state} />
+            </div>
+            <div className="ml-auto inline-flex gap-x-5">
+              <button className="px-4 py-3 font-mono tracking-widest text-black border-2 border-black rounded-lg bg-blue-300 cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90">
+                Edit
+              </button>
+              <button className="px-4 py-3 font-mono tracking-widest text-black border-2 border-black rounded-lg bg-red-300 cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90">
+                Close
+              </button>
+            </div>
           </div>
         </div>
       ) : (
