@@ -19,4 +19,8 @@ interface TaskBodyComponentProps {
   setCurrentTaskDetails: (v: TaskType) => void;
 }
 
-export { TaskBodyComponentProps, TaskType };
+interface StateBoxComponentProps {
+  state: "Open" | "Closed" | "Saved",
+}
+
+export { TaskBodyComponentProps, TaskType, StateBoxComponentProps };

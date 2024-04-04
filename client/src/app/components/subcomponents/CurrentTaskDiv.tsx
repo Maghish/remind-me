@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import StateBox from "./StateBox";
 
 function CurrentTaskDiv({ taskDetails }: any) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [rank, setRank] = useState<number>();
-  const [state, setState] = useState<"Open" | "Closed" | "Saved" | string>(
+  const [state, setState] = useState<"Open" | "Closed" | "Saved">(
     "Open"
   );
 
@@ -24,8 +25,12 @@ function CurrentTaskDiv({ taskDetails }: any) {
           <h2 className="font-mono tracking-wider text-black text-xl font-semibold">
             {name}
           </h2>
-          <div className="max-h-[350px] overflow-y-auto flex">
+          <div className="min-h-[350px] max-h-[350px] overflow-y-auto flex">
             <span className="text-base font-mono text-black text-wrap">{description}</span>
+          </div>
+          <div className="flex flex-row justify-between w-full items-center">
+            <StateBox state={state} />
+            <p className="font-mono text-black font-semibold text-lg">#{rank}</p>
           </div>
         </div>
       ) : (
