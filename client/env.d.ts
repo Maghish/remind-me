@@ -3,6 +3,7 @@
 
 interface TaskType {
   [
+    id: string,
     name: string,
     description: string,
     rank: number,
@@ -16,6 +17,7 @@ interface CreateTaskFormComponentProps {
 
 interface EditCurrentTaskModalComponentProps {
   closeForm: () => void;
+  id: string;
   name: string;
   description: string;
   rank: number;
