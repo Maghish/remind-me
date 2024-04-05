@@ -6,11 +6,13 @@ import { FaCaretDown } from "react-icons/fa";
 
 function EditCurrentTaskModal({
   closeForm,
+  id,
   name,
   description,
   rank,
   state,
 }: EditCurrentTaskModalComponentProps) {
+  const [taskId, setId] = useState<string>(id);
   const [taskName, setTaskName] = useState<string>(name);
   const [taskDescription, setTaskDescription] = useState<string>(description);
   const [taskRank, setTaskRank] = useState<number>(rank);
@@ -34,7 +36,21 @@ function EditCurrentTaskModal({
     getNotAvailableRanks();
   }, []);
 
-  function editTask() {}
+  function editTask() {
+    if (errorMessage === false) {
+      axios
+        .post("/task/edittask", {
+          id: taskId,
+          name: taskName,
+          description: taskDescription,
+          rank: taskRank,
+          state: taskState,
+        })
+        .then((response) => {
+          window.location.reload();
+        });
+    }
+  }
 
   return (
     <div className="fixed min-w-screen w-screen min-h-screen h-screen top-0 right-0 backdrop-blur-lg flex items-center justify-center z-10">
@@ -67,6 +83,34 @@ function EditCurrentTaskModal({
             }}
             defaultValue={taskDescription}
           ></textarea>
+          <div className="relative">
+            <select
+              className="w-full px-4 py-3 appearance-none bg-stone-100 outline-none rounded-md font-mono text-black"
+              onChange={(e) => {
+                setTaskState(e.target.value);
+              }}
+            >
+              {taskState === "Open" ? (
+                <option value="Open" selected>
+                  Open
+                </option>
+              ) : (
+                <option value="Open">Open</option>
+              )}
+              {taskState === "Saved" ? (
+                <option value="Saved" selected>
+                  Saved
+                </option>
+              ) : (
+                <option value="Saved">Saved</option>
+              )}
+            </select>
+            <FaCaretDown
+              size="18px"
+              color="#000000"
+              className="absolute top-4 right-[16px]"
+            />
+          </div>
           <div className="w-full flex flex-col">
             <input
               type="number"
@@ -94,33 +138,6 @@ function EditCurrentTaskModal({
               ""
             )}
           </div>
-          <div className="relative">
-            <select
-              className="w-full px-4 py-3 appearance-none bg-stone-100 outline-none rounded-md font-mono text-black"
-              onChange={(e) => {
-                setTaskState(e.target.value);
-              }}
-            >
-              {taskState === "Open" ? (
-                <option value="Open" selected>
-                  Open
-                </option>
-              ) : (
-                <option value="Open">Open</option>
-              )}
-              {taskState === "Saved" ? (
-                <option value="Saved" selected>Saved</option>
-              ) : (
-                <option value="Saved">Saved</option>
-              )}
-            </select>
-            <FaCaretDown
-              size="18px"
-              color="#000000"
-              className="absolute top-4 right-[16px]"
-            />
-          </div>
-
           <button
             type="button"
             className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70"
