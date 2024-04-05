@@ -3,6 +3,7 @@ import StateBox from "./subcomponents/StateBox";
 import EditCurrentTaskModal from "./subcomponents/EditCurrentTaskModal";
 
 function CurrentTaskDiv({ taskDetails }: any) {
+  const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [rank, setRank] = useState<number>(0);
@@ -11,10 +12,11 @@ function CurrentTaskDiv({ taskDetails }: any) {
 
   useEffect(() => {
     if (taskDetails !== null && taskDetails !== undefined) {
-      setName(taskDetails[0]);
-      setDescription(taskDetails[1]);
-      setRank(taskDetails[2]);
-      setState(taskDetails[3]);
+      setId(taskDetails[0]);
+      setName(taskDetails[1]);
+      setDescription(taskDetails[2]);
+      setRank(taskDetails[3]);
+      setState(taskDetails[4]);
     }
   }, [taskDetails]);
 
@@ -56,7 +58,7 @@ function CurrentTaskDiv({ taskDetails }: any) {
           Please select a task to display
         </div>
       )}
-      {editCurrentTaskModalVisible ? <EditCurrentTaskModal closeForm={() => { setEditCurrentTaskModalVisible(false)}} name={name} description={description} rank={rank} state={state} /> : ""}
+      {editCurrentTaskModalVisible ? <EditCurrentTaskModal closeForm={() => { setEditCurrentTaskModalVisible(false)}} id={id} name={name} description={description} rank={rank} state={state} /> : ""}
     </>
   );
 }
