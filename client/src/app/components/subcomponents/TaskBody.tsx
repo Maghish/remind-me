@@ -17,7 +17,7 @@ function TaskBody({
       <span className="text-black font-mono tracking-widest mb-2 transition delay-75 duration-200 ease-out group-hover:text-opacity-50">
         {name}
       </span>
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto no-scrollbar">
         <p className="text-black text-sm font-mono transition delay-75 duration-200 ease-ou5 group-hover:text-opacity-50">
           {description}
         </p>
