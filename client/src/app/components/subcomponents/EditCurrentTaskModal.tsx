@@ -1,42 +1,42 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import { CreateTaskFormComponentProps } from "../../../env";
+import { useEffect, useState } from "react";
+import { EditCurrentTaskModalComponentProps } from "../../../../env";
 
-function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
-  const [taskName, setTaskName] = useState<string>("");
-  const [taskDescription, setTaskDescription] = useState<string>("");
-  const [taskRank, setTaskRank] = useState<number>(0);
+function EditCurrentTaskModal({
+  closeForm,
+  name,
+  description,
+  rank,
+  state,
+}: EditCurrentTaskModalComponentProps) {
+  const [taskName, setTaskName] = useState<string>(name);
+  const [taskDescription, setTaskDescription] = useState<string>(description);
+  const [taskRank, setTaskRank] = useState<number>(rank);
+  const [taskState, setTaskState] = useState<"Open" | "Closed" | "Saved">(
+    state
+  );
   const [notAvailableRanks, setNotAvailableRanks] = useState<number[]>();
   const [errorMessage, setErrorMessage] = useState<string | false>(false);
 
   useEffect(() => {
     async function getNotAvailableRanks() {
       const res = await axios.get("/task/notavailableranks");
-      setNotAvailableRanks(res.data.allUsedRanks);
+      if (res.data.allUsedRanks) {
+        const originalArray =  res.data.allUsedRanks
+        const newArray = originalArray.filter((element: number) => element !== taskRank);
+        setNotAvailableRanks(newArray);
+        console.log(newArray);
+      }
     }
 
     getNotAvailableRanks();
-  }, [])
+  }, []);
 
-  function createTask() {
-    if (errorMessage === false) {
-      axios.post("/task/createtask", {
-        name: taskName, 
-        description: taskDescription, 
-        rank: taskRank, 
-        state: "Open"
-      })
-        .then(response => {
-          window.location.reload();
-      }) 
-    }
-
-    else {}
-  }
+  function editTask() {}
 
   return (
-    <div className="fixed min-w-full min-h-full backdrop-blur-lg flex items-center justify-center z-10">
+    <div className="fixed min-w-screen w-screen min-h-screen h-screen top-0 right-0 backdrop-blur-lg flex items-center justify-center z-10">
       <form className="relative min-w-fit md:min-w-[500px] w-auto min-h-[600px] h-auto bg-white p-7 sm:p-10 rounded-lg flex flex-col gap-y-10 shadow-2xl">
         <IoMdClose
           className="absolute self-end top-[25px] right-[30px] cursor-pointer"
@@ -47,7 +47,7 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
           }}
         />
         <span className="text-3xl font-mono font-semibold text-center text-black">
-          Create a task
+          Edit task
         </span>
         <div className="flex flex-col gap-y-6 min-h-[300px]">
           <input
@@ -56,6 +56,7 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
             onChange={(e) => {
               setTaskName(e.target.value);
             }}
+            defaultValue={taskName}
           ></input>
           <textarea
             className="w-full min-h-[200px] px-4 py-3 bg-stone-100 outline-none rounded-md font-mono text-sm text-black placeholder:font-mono placeholder:text-stone-400 placeholder:text-sm"
@@ -63,6 +64,7 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
             onChange={(e) => {
               setTaskDescription(e.target.value);
             }}
+            defaultValue={taskDescription}
           ></textarea>
           <div className="w-full flex flex-col">
             <input
@@ -81,6 +83,7 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
                   setErrorMessage(false);
                 }
               }}
+              defaultValue={taskRank}
             ></input>
             {errorMessage != false ? (
               <span className="m-0 p-0 text-sm text-red-400 font-mono tracking-tight text-center">
@@ -90,8 +93,12 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
               ""
             )}
           </div>
-          <button type="button" className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70" onClick={createTask} >
-            Create
+          <button
+            type="button"
+            className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70"
+            onClick={editTask}
+          >
+            Edit
           </button>
         </div>
       </form>
@@ -99,4 +106,4 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
   );
 }
 
-export default CreateTaskForm;
+export default EditCurrentTaskModal;

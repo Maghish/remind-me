@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import StateBox from "./subcomponents/StateBox";
+import EditCurrentTaskModal from "./subcomponents/EditCurrentTaskModal";
 
 function CurrentTaskDiv({ taskDetails }: any) {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [rank, setRank] = useState<number>();
+  const [rank, setRank] = useState<number>(0);
   const [state, setState] = useState<"Open" | "Closed" | "Saved">("Open");
+  const [editCurrentTaskModalVisible, setEditCurrentTaskModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (taskDetails !== null && taskDetails !== undefined) {
@@ -15,8 +17,6 @@ function CurrentTaskDiv({ taskDetails }: any) {
       setState(taskDetails[3]);
     }
   }, [taskDetails]);
-
-  function ReplaceElementsWithFields() {}
 
   return (
     <>
@@ -41,7 +41,7 @@ function CurrentTaskDiv({ taskDetails }: any) {
             <div className="ml-auto inline-flex gap-x-5">
               <button
                 className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
-                onClick={ReplaceElementsWithFields}
+                onClick={() => {setEditCurrentTaskModalVisible(true)}}
               >
                 Edit
               </button>
@@ -56,6 +56,7 @@ function CurrentTaskDiv({ taskDetails }: any) {
           Please select a task to display
         </div>
       )}
+      {editCurrentTaskModalVisible ? <EditCurrentTaskModal closeForm={() => { setEditCurrentTaskModalVisible(false)}} name={name} description={description} rank={rank} state={state} /> : ""}
     </>
   );
 }
