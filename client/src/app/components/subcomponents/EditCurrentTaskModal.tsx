@@ -2,6 +2,7 @@ import axios from "axios";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { EditCurrentTaskModalComponentProps } from "../../../../env";
+import { FaCaretDown } from "react-icons/fa";
 
 function EditCurrentTaskModal({
   closeForm,
@@ -13,9 +14,7 @@ function EditCurrentTaskModal({
   const [taskName, setTaskName] = useState<string>(name);
   const [taskDescription, setTaskDescription] = useState<string>(description);
   const [taskRank, setTaskRank] = useState<number>(rank);
-  const [taskState, setTaskState] = useState<"Open" | "Closed" | "Saved">(
-    state
-  );
+  const [taskState, setTaskState] = useState<string>(state); // Due to some stupid reasons I have to set this state's type to string instead of "Open" | "Closed" | "Saved"
   const [notAvailableRanks, setNotAvailableRanks] = useState<number[]>();
   const [errorMessage, setErrorMessage] = useState<string | false>(false);
 
@@ -23,8 +22,10 @@ function EditCurrentTaskModal({
     async function getNotAvailableRanks() {
       const res = await axios.get("/task/notavailableranks");
       if (res.data.allUsedRanks) {
-        const originalArray =  res.data.allUsedRanks
-        const newArray = originalArray.filter((element: number) => element !== taskRank);
+        const originalArray = res.data.allUsedRanks;
+        const newArray = originalArray.filter(
+          (element: number) => element !== taskRank
+        );
         setNotAvailableRanks(newArray);
         console.log(newArray);
       }
@@ -93,6 +94,33 @@ function EditCurrentTaskModal({
               ""
             )}
           </div>
+          <div className="relative">
+            <select
+              className="w-full px-4 py-3 appearance-none bg-stone-100 outline-none rounded-md font-mono text-black"
+              onChange={(e) => {
+                setTaskState(e.target.value);
+              }}
+            >
+              {taskState === "Open" ? (
+                <option value="Open" selected>
+                  Open
+                </option>
+              ) : (
+                <option value="Open">Open</option>
+              )}
+              {taskState === "Saved" ? (
+                <option value="Saved" selected>Saved</option>
+              ) : (
+                <option value="Saved">Saved</option>
+              )}
+            </select>
+            <FaCaretDown
+              size="18px"
+              color="#000000"
+              className="absolute top-4 right-[16px]"
+            />
+          </div>
+
           <button
             type="button"
             className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70"
