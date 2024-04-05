@@ -3,14 +3,14 @@
 import Loginform from "./components/Loginform";
 import Signupform from "./components/Signupform";
 import Navbar from "./components/Navbar";
-import TaskList from "./components/subcomponents/TaskList";
+import TaskList from "./components/TaskList";
 
 import { AuthContext } from "./contexts/authContext";
 
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import CreateTaskForm from "./components/CreateTaskForm";
-import CurrentTaskBody from "./components/subcomponents/CurrentTaskDiv";
+import CurrentTaskBody from "./components/CurrentTaskDiv";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL; //http://localhost:2000/api //https://remind-me-r5u3.onrender.com/api
 

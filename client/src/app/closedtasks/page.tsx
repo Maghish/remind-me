@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/authContext";
 import Navbar from "../components/Navbar";
 import CreateTaskForm from "../components/CreateTaskForm";
-import TaskList from "../components/subcomponents/TaskList";
+import TaskList from "../components/TaskList";
 
 function ClosedTasks() {
   const { mode, userData } = useContext(AuthContext);

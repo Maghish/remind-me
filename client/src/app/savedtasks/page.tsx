@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/authContext";
 import Navbar from "../components/Navbar";
 import CreateTaskForm from "../components/CreateTaskForm";
-import TaskList from "../components/subcomponents/TaskList";
+import TaskList from "../components/TaskList";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL; //http://localhost:2000/api https://remind-me-r5u3.onrender.com/api
 
@@ -33,8 +33,6 @@ function SavedTasks() {
       getAllTasks();
     }
   }, []);
-  
-  
 
   return (
     <div className="flex flex-col gap-x-4">
