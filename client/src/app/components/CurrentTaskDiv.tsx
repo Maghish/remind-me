@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import StateBox from "./subcomponents/StateBox";
 import EditCurrentTaskModal from "./subcomponents/EditCurrentTaskModal";
+import axios from "axios";
 
 function CurrentTaskDiv({ taskDetails }: any) {
   const [id, setId] = useState<string>("");
@@ -8,7 +9,8 @@ function CurrentTaskDiv({ taskDetails }: any) {
   const [description, setDescription] = useState<string>("");
   const [rank, setRank] = useState<number>(0);
   const [state, setState] = useState<"Open" | "Closed" | "Saved">("Open");
-  const [editCurrentTaskModalVisible, setEditCurrentTaskModalVisible] = useState<boolean>(false);
+  const [editCurrentTaskModalVisible, setEditCurrentTaskModalVisible] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (taskDetails !== null && taskDetails !== undefined) {
@@ -19,6 +21,17 @@ function CurrentTaskDiv({ taskDetails }: any) {
       setState(taskDetails[4]);
     }
   }, [taskDetails]);
+
+  function closeTask() {
+    axios
+      .post("/task/changetaskstate", {
+        id: id,
+        state: "Closed",
+      })
+      .then((response) => {
+        window.location.reload();
+      });
+  }
 
   return (
     <>
@@ -43,11 +56,16 @@ function CurrentTaskDiv({ taskDetails }: any) {
             <div className="ml-auto inline-flex gap-x-5">
               <button
                 className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
-                onClick={() => {setEditCurrentTaskModalVisible(true)}}
+                onClick={() => {
+                  setEditCurrentTaskModalVisible(true);
+                }}
               >
                 Edit
               </button>
-              <button className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90">
+              <button
+                className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+                onClick={closeTask}
+              >
                 Close
               </button>
             </div>
@@ -58,7 +76,20 @@ function CurrentTaskDiv({ taskDetails }: any) {
           Please select a task to display
         </div>
       )}
-      {editCurrentTaskModalVisible ? <EditCurrentTaskModal closeForm={() => { setEditCurrentTaskModalVisible(false)}} id={id} name={name} description={description} rank={rank} state={state} /> : ""}
+      {editCurrentTaskModalVisible ? (
+        <EditCurrentTaskModal
+          closeForm={() => {
+            setEditCurrentTaskModalVisible(false);
+          }}
+          id={id}
+          name={name}
+          description={description}
+          rank={rank}
+          state={state}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 }

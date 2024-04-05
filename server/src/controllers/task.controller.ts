@@ -95,21 +95,21 @@ async function getTask(req: Request, res: Response) {
   }
 }
 
-// async function changeTaskState(req: Request, res: Response) {
-//   try {
-//     const { id, state } = req.body;
-//     const task = await TaskModel.findById(id);
-//     task!.state = state;
-//     const savedTask = await task!.save();
-//     return res
-//       .status(200)
-//       .json({ message: "Successfully changed task state", task: savedTask });
-//   } catch (error) {
-//     return res.status(200).json({
-//       message: error,
-//     });
-//   }
-// }
+async function changeTaskState(req: Request, res: Response) {
+  try {
+    const { id, state } = req.body;
+    const task = await TaskModel.findById(id);
+    task!.state = state;
+    const savedTask = await task!.save();
+    return res
+      .status(200)
+      .json({ message: "Successfully changed task state", task: savedTask });
+  } catch (error) {
+    return res.status(200).json({
+      message: error,
+    });
+  }
+}
 
 async function notAvailableRanks(req: Request, res: Response) {
   try {
@@ -132,4 +132,5 @@ export {
   editTask,
   getTask,
   notAvailableRanks,
+  changeTaskState
 };
