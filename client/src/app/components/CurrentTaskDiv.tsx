@@ -37,39 +37,40 @@ function CurrentTaskDiv({ taskDetails }: any) {
     <>
       {name && description && rank && state ? (
         <div className="w-full h-max flex flex-col gap-y-7 items-center">
-          <h2 className="font-mono tracking-wider text-black text-xl font-semibold">
-            {name}{" "}
-            <span className="font-mono text-black font-semibold text-lg">
+          <div className="flex flex-row items-center w-full">
+            <p className="mr-auto font-mono tracking-wider text-black text-xl font-semibold">
+              {name}{" "}
+            </p>
+            <span className="ml-[20px] mr-[10px] font-mono text-black font-semibold text-lg">
               (#{rank})
             </span>
-          </h2>
-          <div className="flex flex-row justify-center gap-x-[293px] w-full items-center"></div>
-          <div className="min-h-[350px] max-h-[350px] overflow-y-auto no-scrollbar flex">
+            <div className="">
+              <StateBox state={state} />
+            </div>
+          </div>
+          <div className="min-h-[350px] max-h-[350px] overflow-y-auto no-scrollbar flex w-full text-start">
             <span className="text-base font-mono text-black text-wrap">
               {description}
             </span>
           </div>
-          <div className="flex flex-row w-full items-center">
-            <div className="self-start">
-              <StateBox state={state} />
-            </div>
-            <div className="ml-auto inline-flex gap-x-5">
-              <button
-                className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
-                onClick={() => {
-                  setEditCurrentTaskModalVisible(true);
-                }}
-              >
-                Edit
-              </button>
-              <button
-                className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
-                onClick={closeTask}
-              >
-                Close
-              </button>
-            </div>
+
+          <div className="mt-5 inline-flex gap-x-5">
+            <button
+              className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+              onClick={() => {
+                setEditCurrentTaskModalVisible(true);
+              }}
+            >
+              Edit
+            </button>
+            <button
+              className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+              onClick={closeTask}
+            >
+              Close
+            </button>
           </div>
+
         </div>
       ) : (
         <div className="w-full min-h-[70px] h-max mt-6 bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
