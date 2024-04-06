@@ -17,22 +17,22 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
     }
 
     getNotAvailableRanks();
-  }, [])
+  }, []);
 
   function createTask() {
     if (errorMessage === false) {
-      axios.post("/task/createtask", {
-        name: taskName, 
-        description: taskDescription, 
-        rank: taskRank, 
-        state: "Open"
-      })
-        .then(response => {
+      axios
+        .post("/task/createtask", {
+          name: taskName,
+          description: taskDescription,
+          rank: taskRank,
+          state: "Open",
+        })
+        .then((response) => {
           window.location.reload();
-      }) 
+        });
+    } else {
     }
-
-    else {}
   }
 
   return (
@@ -90,7 +90,11 @@ function CreateTaskForm({ closeForm }: CreateTaskFormComponentProps) {
               ""
             )}
           </div>
-          <button type="button" className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70" onClick={createTask} >
+          <button
+            type="button"
+            className="mt-auto bg-inherit border-2 border-black rounded-md p-3 px-6 w-fit font-mono text-sm text-black self-center transition delay-100 duration-200 ease-out hover:border-opacity-50 hover:text-opacity-70"
+            onClick={createTask}
+          >
             Create
           </button>
         </div>
