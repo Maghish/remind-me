@@ -36,12 +36,12 @@ function CurrentTaskDiv({ taskDetails }: any) {
   return (
     <>
       {name && description && rank && state ? (
-        <div className="w-full h-max flex flex-col gap-y-7 items-center">
+        <div className="w-full h-max hidden md:flex flex-col gap-y-7 items-center">
           <div className="flex flex-row items-center w-full">
-            <p className="mr-auto font-mono tracking-wider text-black text-xl font-semibold">
+            <p className="mr-auto font-mono tracking-wider text-black text-lg lg:text-xl font-semibold">
               {name}{" "}
             </p>
-            <span className="ml-[20px] mr-[10px] font-mono text-black font-semibold text-lg">
+            <span className="ml-[20px] mr-[10px] font-mono text-black font-semibold text-base lg:text-lg">
               (#{rank})
             </span>
             <div className="">
@@ -49,7 +49,7 @@ function CurrentTaskDiv({ taskDetails }: any) {
             </div>
           </div>
           <div className="min-h-[350px] max-h-[350px] overflow-y-auto no-scrollbar flex w-full text-start">
-            <span className="text-base font-mono text-black text-wrap">
+            <span className="text-sm lg:text-base font-mono text-black text-wrap">
               {description}
             </span>
           </div>
