@@ -70,7 +70,6 @@ function CurrentTaskDiv({ taskDetails }: any) {
               Close
             </button>
           </div>
-
         </div>
       ) : (
         <div className="hidden md:block w-full min-h-[70px] h-max mt-6 bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
