@@ -73,7 +73,7 @@ function CurrentTaskDiv({ taskDetails }: any) {
 
         </div>
       ) : (
-        <div className="w-full min-h-[70px] h-max mt-6 bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
+        <div className="hidden md:block w-full min-h-[70px] h-max mt-6 bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
           Please select a task to display
         </div>
       )}
