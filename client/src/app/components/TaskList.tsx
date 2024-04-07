@@ -1,10 +1,21 @@
 import TaskBody from "./subcomponents/TaskBody";
 import CurrentTaskDiv from "./CurrentTaskDiv";
+import CurrentTaskModal from "./CurrentTaskModal";
 import { useEffect, useState } from "react";
 import { TaskType } from "../../../env";
 
 function TaskList({ allTasks }: any) {
   const [taskDetails, setTaskDetails] = useState<TaskType | null>(null);
+  const [currentTaskModalVisible, setCurrentTaskModalVisible] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (taskDetails !== null) {
+      setCurrentTaskModalVisible(true);
+    } else {
+      setCurrentTaskModalVisible(false);
+    }
+  }, [taskDetails]);
 
   return (
     <div className="mt-[90px] w-full h-auto py-6 px-10 lg:px-20 xl:px-40 flex flex-row justify-center gap-x-12 lg:gap-x-20 xl:gap-x-40">
@@ -25,6 +36,17 @@ function TaskList({ allTasks }: any) {
         })}
       </div>
       <CurrentTaskDiv taskDetails={taskDetails} />
+
+      {taskDetails !== null && currentTaskModalVisible ? (
+        <CurrentTaskModal
+          closeForm={() => {
+            setCurrentTaskModalVisible(false);
+          }}
+          taskDetails={taskDetails}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
