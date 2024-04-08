@@ -4,27 +4,27 @@ import { GoIssueClosed, GoIssueDraft, GoIssueOpened } from "react-icons/go";
 function StateBox({ state }: StateBoxComponentProps) {
   if (state === "Open") {
     return (
-      <div className="min-w-[52px] w-auto p-2 bg-[#238636] flex flex-row items-center gap-x-2 rounded-lg">
-        <GoIssueOpened color="#FFFFFF" />
-        <p className="font-mono text-white">Open</p>
+      <div className="w-fit p-1.5 bg-[#238636] flex flex-row items-center gap-x-1.5 rounded-lg">
+        <GoIssueOpened size="14px" color="#FFFFFF" />
+        <p className="font-mono text-white text-sm">Open</p>
       </div>
     );
   }
 
   if (state === "Closed") {
     return (
-      <div className="min-w-[52px] w-auto p-2 bg-[#8957E5] flex flex-row items-center gap-x-2 rounded-lg">
-        <GoIssueClosed color="#FFFFFF" />
-        <p className="font-mono text-white">Closed</p>
+      <div className="w-fit p-1.5 bg-[#8957E5] flex flex-row items-center gap-x-1.5 rounded-lg">
+        <GoIssueClosed size="14px" color="#FFFFFF" />
+        <p className="font-mono text-white text-sm">Closed</p>
       </div>
     );
   }
 
   if (state === "Saved") {
     return (
-      <div className="min-w-[52px] w-auto p-2 bg-[#6f6f6f] flex flex-row items-center gap-x-2 rounded-lg">
-        <GoIssueDraft color="#FFFFFF" />
-        <p className="font-mono text-white">Saved</p>
+      <div className="w-fit p-1.5 bg-[#6f6f6f] flex flex-row items-center gap-x-1 rounded-lg">
+        <GoIssueDraft size="14px" color="#FFFFFF" />
+        <p className="font-mono text-white text-sm">Saved</p>
       </div>
     );
   }
