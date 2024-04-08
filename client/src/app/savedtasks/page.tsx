@@ -36,32 +36,32 @@ function SavedTasks() {
 
   return (
     <div className="flex flex-col gap-x-4">
+      <Navbar
+        currentPage="SavedTasks"
+        setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
+      />
+      {createTaskForm ? (
+        <CreateTaskForm
+          closeForm={() => {
+            setCreateTaskForm(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
       {mode === "Guest" ? (
         ""
       ) : (
         <>
-          <Navbar
-            currentPage="SavedTasks"
-            setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
-          />
-          {createTaskForm ? (
-            <CreateTaskForm
-              closeForm={() => {
-                setCreateTaskForm(false);
-              }}
-            />
+          {allTasks.length > 0 ? (
+            <TaskList allTasks={allTasks} />
           ) : (
-            ""
-          )}
-          <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
-            {allTasks.length > 0 ? (
-              <TaskList allTasks={allTasks} />
-            ) : (
+            <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
               <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
                 No tasks found
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </>
       )}
     </div>
