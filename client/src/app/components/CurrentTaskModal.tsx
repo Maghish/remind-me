@@ -55,6 +55,7 @@ function CurrentTaskModal({ closeForm, taskDetails }: any) {
               </div>
               <div className="inline-flex gap-x-5">
                 <button
+                  type="button"
                   className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
                   onClick={() => {
                     setEditCurrentTaskModalVisible(true);
@@ -62,7 +63,10 @@ function CurrentTaskModal({ closeForm, taskDetails }: any) {
                 >
                   Edit
                 </button>
-                <button className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90">
+                <button
+                  type="button"
+                  className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+                >
                   Close
                 </button>
               </div>
