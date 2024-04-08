@@ -113,7 +113,8 @@ async function changeTaskState(req: Request, res: Response) {
 
 async function notAvailableRanks(req: Request, res: Response) {
   try {
-    const allTasks = await TaskModel.find({});
+    const currentUser = await getCurrentUserData(req);
+    const allTasks = await TaskModel.find({ author: currentUser!.username });
     let allUsedRanks: number[] = [];
     allTasks.forEach((task) => {
       allUsedRanks.push(task.rank);
