@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar";
 import CreateTaskForm from "../components/CreateTaskForm";
 import TaskList from "../components/TaskList";
 
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL; //http://localhost:2000/api https://remind-me-r5u3.onrender.com/api
+
 function ClosedTasks() {
   const { mode, userData } = useContext(AuthContext);
   const [allTasks, setAllTasks] = useState<any[]>([]);
@@ -34,32 +36,32 @@ function ClosedTasks() {
 
   return (
     <div className="flex flex-col gap-x-4">
+      <Navbar
+        currentPage="ClosedTasks"
+        setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
+      />
+      {createTaskForm ? (
+        <CreateTaskForm
+          closeForm={() => {
+            setCreateTaskForm(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
       {mode === "Guest" ? (
         ""
       ) : (
         <>
-          <Navbar
-            currentPage="ClosedTasks"
-            setCreateTaskForm={(v: boolean) => setCreateTaskForm(v)}
-          />
-          {createTaskForm ? (
-            <CreateTaskForm
-              closeForm={() => {
-                setCreateTaskForm(false);
-              }}
-            />
+          {allTasks.length > 0 ? (
+            <TaskList allTasks={allTasks} />
           ) : (
-            ""
-          )}
-          <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
-            {allTasks.length > 0 ? (
-              <TaskList allTasks={allTasks} />
-            ) : (
+            <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
               <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
                 No tasks found
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </>
       )}
     </div>
