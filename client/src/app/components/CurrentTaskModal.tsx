@@ -23,6 +23,17 @@ function CurrentTaskModal({ closeForm, taskDetails }: any) {
     }
   }, [taskDetails]);
 
+  function closeTask() {
+    axios
+      .post("/task/changetaskstate", {
+        id: id,
+        state: "Closed",
+      })
+      .then((response) => {
+        window.location.reload();
+      });
+  }
+
   return (
     <>
       {name && description && rank && state ? (
@@ -66,6 +77,7 @@ function CurrentTaskModal({ closeForm, taskDetails }: any) {
                 <button
                   type="button"
                   className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+                  onClick={closeTask}
                 >
                   Close
                 </button>
