@@ -73,8 +73,10 @@ function Home() {
           {allTasks.length > 0 ? (
             <TaskList allTasks={allTasks} />
           ) : (
-            <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
-              No tasks found
+            <div className="mt-[90px] w-full h-auto p-6 flex justify-center">
+              <div className="w-auto h-[70px] bg-red-300 border-2 border-red-500 text-sm font-mono tracking-widest text-black p-6">
+                No tasks found
+              </div>
             </div>
           )}
         </>
