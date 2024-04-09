@@ -34,6 +34,17 @@ function CurrentTaskModal({ closeForm, taskDetails }: any) {
       });
   }
 
+  function reopenTask() {
+    axios
+      .post("/task/changetaskstate", {
+        id: id,
+        state: "Open",
+      })
+      .then((response) => {
+        window.location.reload();
+      });
+  }
+
   return (
     <>
       {name && description && rank && state ? (
@@ -65,22 +76,34 @@ function CurrentTaskModal({ closeForm, taskDetails }: any) {
                 </span>
               </div>
               <div className="inline-flex gap-x-5 items-center justify-center">
-                <button
-                  type="button"
-                  className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
-                  onClick={() => {
-                    setEditCurrentTaskModalVisible(true);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
-                  onClick={closeTask}
-                >
-                  Close
-                </button>
+                {state === "Closed" ? (
+                  <button
+                    type="button"
+                    className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#238636] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+                    onClick={reopenTask}
+                  >
+                    Reopen
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#236286] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+                      onClick={() => {
+                        setEditCurrentTaskModalVisible(true);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="px-4 py-3 font-mono tracking-widest text-white rounded-lg bg-[#862323] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
+                      onClick={closeTask}
+                    >
+                      Close
+                    </button>
+                  </>
+                )}
               </div>
             </form>
           </div>
